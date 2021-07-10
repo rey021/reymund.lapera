@@ -8,18 +8,13 @@ import java.util.Properties;
 
 public class getConfig {
 	
-	String	username1 = "",
-			username2 = "",
-			password = "",
-			driverpath = "",
+	String	driverpath = "",
 			webDriver = "",
 			systemProperty = "",
 			url = "",
 			time = "",
 			outputDIR = "",
 			outputFileName= "",
-			stockListFile = "",
-			FileHeader = "",
 			date = "",
 			startdate = "",
 			enddate = "",
@@ -85,9 +80,7 @@ public class getConfig {
 			
 			outputFileName = prop.getProperty("outputFileName");
 			log.info("outputFileName = " + outputFileName);
-			
-			FileHeader = prop.getProperty("FileHeader");
-			log.info("FileHeader = " + FileHeader);
+
 			
 			toolsDIR = prop.getProperty("toolsDIR");
 			log.info("toolsDIR = " + toolsDIR);
@@ -150,18 +143,6 @@ public class getConfig {
 			}
 		}
 	} // End of initializeWebElements Method
-	
-	public String getUser1() {
-		return username1;
-	}
-	
-	public String getUser2() {
-		return username2;
-	}
-	
-	public String getPassword() {
-		return password;
-	}
 	
 	public String getDriverPath() {
 		return driverpath;
@@ -226,14 +207,7 @@ public class getConfig {
 	public String getOutputFileName() {
 		return outputFileName;
 	}
-	
-	public String getStocklistFile() {
-		return stockListFile;
-	}
-	
-	public String getFileHeader() {
-		return FileHeader;
-	}
+
 	
 	public String getTodayDate() {
 		date = java.time.LocalDate.now().toString();
