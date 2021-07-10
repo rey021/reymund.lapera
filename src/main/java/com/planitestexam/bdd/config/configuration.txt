@@ -1,0 +1,11 @@
+driverpath=src/main/java/com/planitestexam/bdd/tools/
+driver=chromedriver.exe
+systemproperty = webdriver.chrome.driver
+waittime=2
+outputDIR = src/main/java/com/planitestexam/bdd/output
+toolsDIR=src/main/java/com/planitestexam/bdd/tools/
+configDIR=src/main/java/com/planitestexam/bdd/config/
+outputFileName = uitest.csv
+logType=brokerwatch
+secret=C\:\\Users\\reymu\\Documents\\
+#sample secret=C\:\\Users\\reymu\\Documents\\
