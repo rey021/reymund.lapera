@@ -38,4 +38,8 @@ public class execute {
     public void goToUrl(String url){
         SE.goToSite(url);
     }
+
+    public void goToContactPage(String locator){
+        SE.clickElement(locator, config.getContactPageElement());
+    }
 } // End of method execute

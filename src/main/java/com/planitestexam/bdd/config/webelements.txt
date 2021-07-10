@@ -1,10 +1,1 @@
-user1=txtUser1
-user2=txtUser2
-password=txtPassword
-frame1ID=headern
-quoteCSS=#CQ
-brokerHistoryCSS=#L1_2_3
-submit=/html/body/div[1]/div/div/div[3]/form/div/input[10]
-resultsTable=/html/body/form/table/tbody/
-startdate=cbDateFrom
-enddate=cbDateTo
+contactpage=//*[@id="nav-contact"]/a

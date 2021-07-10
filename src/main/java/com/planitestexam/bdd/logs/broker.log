@@ -400,3 +400,96 @@
 2021-07-10 21:00:49,105 [main] INFO  - loading properties for webElements...
 2021-07-10 21:00:51,175 [main] INFO  - Open URL: http://jupiter.cloud.planittesting.com
 2021-07-10 21:01:10,973 [main] INFO  - Page load has been complete
+2021-07-10 21:07:21,298 [main] INFO  - src/main/java/com/planitestexam/bdd/config/configuration.txt
+2021-07-10 21:07:21,307 [main] INFO  - loading properties for credentials and url...
+2021-07-10 21:07:21,307 [main] INFO  - driverpath = src/main/java/com/planitestexam/bdd/tools/
+2021-07-10 21:07:21,315 [main] INFO  - webDriver = chromedriver.exe
+2021-07-10 21:07:21,315 [main] INFO  - SystemProperty = webdriver.chrome.driver
+2021-07-10 21:07:21,323 [main] INFO  - waiting time = 180
+2021-07-10 21:07:21,323 [main] INFO  - url = null
+2021-07-10 21:07:21,332 [main] INFO  - outputDIR = src/main/java/com/planitestexam/bdd/output
+2021-07-10 21:07:21,332 [main] INFO  - outputFileName = uitest.csv
+2021-07-10 21:07:21,348 [main] INFO  - toolsDIR = src/main/java/com/planitestexam/bdd/tools/
+2021-07-10 21:07:21,356 [main] INFO  - configDIR = src/main/java/com/planitestexam/bdd/config/
+2021-07-10 21:07:21,356 [main] INFO  - logType = uitest
+2021-07-10 21:07:21,356 [main] INFO  - secretFile= C:\Users\reymu\Documents\
+2021-07-10 21:07:21,356 [main] INFO  - initialize webElement
+2021-07-10 21:07:21,364 [main] INFO  - src/main/java/com/planitestexam/bdd/config/webElements.txt
+2021-07-10 21:07:21,364 [main] INFO  - loading properties for webElements...
+2021-07-10 21:07:23,457 [main] INFO  - Open URL: http://jupiter.cloud.planittesting.com
+2021-07-10 21:07:45,403 [main] INFO  - Page load has been complete
+2021-07-10 21:29:26,018 [main] INFO  - src/main/java/com/planitestexam/bdd/config/configuration.txt
+2021-07-10 21:29:26,022 [main] INFO  - loading properties for credentials and url...
+2021-07-10 21:29:26,024 [main] INFO  - driverpath = src/main/java/com/planitestexam/bdd/tools/
+2021-07-10 21:29:26,026 [main] INFO  - webDriver = chromedriver.exe
+2021-07-10 21:29:26,028 [main] INFO  - SystemProperty = webdriver.chrome.driver
+2021-07-10 21:29:26,030 [main] INFO  - waiting time = 180
+2021-07-10 21:29:26,034 [main] INFO  - url = null
+2021-07-10 21:29:26,036 [main] INFO  - outputDIR = src/main/java/com/planitestexam/bdd/output
+2021-07-10 21:29:26,038 [main] INFO  - outputFileName = uitest.csv
+2021-07-10 21:29:26,040 [main] INFO  - toolsDIR = src/main/java/com/planitestexam/bdd/tools/
+2021-07-10 21:29:26,042 [main] INFO  - configDIR = src/main/java/com/planitestexam/bdd/config/
+2021-07-10 21:29:26,044 [main] INFO  - logType = uitest
+2021-07-10 21:29:26,045 [main] INFO  - secretFile= C:\Users\reymu\Documents\
+2021-07-10 21:29:26,047 [main] INFO  - initialize webElement
+2021-07-10 21:29:26,050 [main] INFO  - src/main/java/com/planitestexam/bdd/config/webElements.txt
+2021-07-10 21:29:26,058 [main] INFO  - loading properties for webElements...
+2021-07-10 21:29:27,748 [main] INFO  - Open URL: http://jupiter.cloud.planittesting.com
+2021-07-10 21:29:46,974 [main] INFO  - Page load has been complete
+2021-07-10 21:30:40,212 [main] INFO  - src/main/java/com/planitestexam/bdd/config/configuration.txt
+2021-07-10 21:30:40,216 [main] INFO  - loading properties for credentials and url...
+2021-07-10 21:30:40,218 [main] INFO  - driverpath = src/main/java/com/planitestexam/bdd/tools/
+2021-07-10 21:30:40,220 [main] INFO  - webDriver = chromedriver.exe
+2021-07-10 21:30:40,222 [main] INFO  - SystemProperty = webdriver.chrome.driver
+2021-07-10 21:30:40,224 [main] INFO  - waiting time = 180
+2021-07-10 21:30:40,227 [main] INFO  - url = null
+2021-07-10 21:30:40,229 [main] INFO  - outputDIR = src/main/java/com/planitestexam/bdd/output
+2021-07-10 21:30:40,230 [main] INFO  - outputFileName = uitest.csv
+2021-07-10 21:30:40,232 [main] INFO  - toolsDIR = src/main/java/com/planitestexam/bdd/tools/
+2021-07-10 21:30:40,233 [main] INFO  - configDIR = src/main/java/com/planitestexam/bdd/config/
+2021-07-10 21:30:40,235 [main] INFO  - logType = uitest
+2021-07-10 21:30:40,237 [main] INFO  - secretFile= C:\Users\reymu\Documents\
+2021-07-10 21:30:40,239 [main] INFO  - initialize webElement
+2021-07-10 21:30:40,242 [main] INFO  - src/main/java/com/planitestexam/bdd/config/webElements.txt
+2021-07-10 21:30:40,243 [main] INFO  - loading properties for webElements...
+2021-07-10 21:30:42,080 [main] INFO  - Open URL: http://jupiter.cloud.planittesting.com
+2021-07-10 21:30:53,716 [main] INFO  - Page load has been complete
+2021-07-10 21:31:44,643 [main] INFO  - src/main/java/com/planitestexam/bdd/config/configuration.txt
+2021-07-10 21:31:44,647 [main] INFO  - loading properties for credentials and url...
+2021-07-10 21:31:44,649 [main] INFO  - driverpath = src/main/java/com/planitestexam/bdd/tools/
+2021-07-10 21:31:44,651 [main] INFO  - webDriver = chromedriver.exe
+2021-07-10 21:31:44,654 [main] INFO  - SystemProperty = webdriver.chrome.driver
+2021-07-10 21:31:44,656 [main] INFO  - waiting time = 180
+2021-07-10 21:31:44,659 [main] INFO  - url = null
+2021-07-10 21:31:44,661 [main] INFO  - outputDIR = src/main/java/com/planitestexam/bdd/output
+2021-07-10 21:31:44,662 [main] INFO  - outputFileName = uitest.csv
+2021-07-10 21:31:44,664 [main] INFO  - toolsDIR = src/main/java/com/planitestexam/bdd/tools/
+2021-07-10 21:31:44,666 [main] INFO  - configDIR = src/main/java/com/planitestexam/bdd/config/
+2021-07-10 21:31:44,668 [main] INFO  - logType = uitest
+2021-07-10 21:31:44,670 [main] INFO  - secretFile= C:\Users\reymu\Documents\
+2021-07-10 21:31:44,671 [main] INFO  - initialize webElement
+2021-07-10 21:31:44,674 [main] INFO  - src/main/java/com/planitestexam/bdd/config/webElements.txt
+2021-07-10 21:31:44,676 [main] INFO  - loading properties for webElements...
+2021-07-10 21:31:46,414 [main] INFO  - Open URL: http://jupiter.cloud.planittesting.com
+2021-07-10 21:32:20,246 [main] INFO  - Page load has been complete
+2021-07-10 21:34:12,628 [main] INFO  - src/main/java/com/planitestexam/bdd/config/configuration.txt
+2021-07-10 21:34:12,632 [main] INFO  - loading properties for credentials and url...
+2021-07-10 21:34:12,634 [main] INFO  - driverpath = src/main/java/com/planitestexam/bdd/tools/
+2021-07-10 21:34:12,637 [main] INFO  - webDriver = chromedriver.exe
+2021-07-10 21:34:12,638 [main] INFO  - SystemProperty = webdriver.chrome.driver
+2021-07-10 21:34:12,640 [main] INFO  - waiting time = 180
+2021-07-10 21:34:12,645 [main] INFO  - url = null
+2021-07-10 21:34:12,647 [main] INFO  - outputDIR = src/main/java/com/planitestexam/bdd/output
+2021-07-10 21:34:12,649 [main] INFO  - outputFileName = uitest.csv
+2021-07-10 21:34:12,652 [main] INFO  - toolsDIR = src/main/java/com/planitestexam/bdd/tools/
+2021-07-10 21:34:12,654 [main] INFO  - configDIR = src/main/java/com/planitestexam/bdd/config/
+2021-07-10 21:34:12,657 [main] INFO  - logType = uitest
+2021-07-10 21:34:12,659 [main] INFO  - secretFile= C:\Users\reymu\Documents\
+2021-07-10 21:34:12,661 [main] INFO  - initialize webElement
+2021-07-10 21:34:12,663 [main] INFO  - src/main/java/com/planitestexam/bdd/config/webElements.txt
+2021-07-10 21:34:12,671 [main] INFO  - loading properties for webElements...
+2021-07-10 21:34:12,673 [main] INFO  - user1Element = //*[@id="nav-contact"]/a
+2021-07-10 21:34:14,307 [main] INFO  - Open URL: http://jupiter.cloud.planittesting.com
+2021-07-10 21:34:45,011 [main] INFO  - Page load has been complete
+2021-07-10 21:34:45,017 [main] INFO  - Locator: xpath Element: //*[@id="nav-contact"]/a
+2021-07-10 21:34:45,113 [main] INFO  - Page load has been complete

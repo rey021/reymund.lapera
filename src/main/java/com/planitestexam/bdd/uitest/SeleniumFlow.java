@@ -11,6 +11,7 @@ import java.util.Vector;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
@@ -45,7 +46,6 @@ public class SeleniumFlow {
 
 		System.setProperty(config.getSystemProperty(), config.getDriverPath() + config.getWebDriver());
 		driver= new ChromeDriver();
-		stockListFile = config.getConfigPath()+config.getStocklistFile();
 	}
 		
 	public void goToSite(String url) {
@@ -130,4 +130,19 @@ public class SeleniumFlow {
 
 	} // end of closeDriver method
 
+	public void clickElement(String locator, String id) {
+		log.info("Locator: " + locator + " === " + "Element: " + id );
+		findElement(locator, id);
+		WebElement element =  findElement(locator, id);
+		element.click();
+		waitUntilLoaded();
+	}
+
+	private WebElement findElement(String locator, String id) {
+		WebElement element = null;
+		if (locator.toLowerCase() == "xpath"){
+			element = driver.findElement(By.xpath(id));
+		}
+		return element;
+	}
 } // End of SeleniumFlow Class

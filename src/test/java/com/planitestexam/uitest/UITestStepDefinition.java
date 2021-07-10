@@ -22,6 +22,7 @@ public class UITestStepDefinition {
     @Given("User is browsing the contact page of (.*)")
     public void guest_is_browsing_the_contact_page_of_http_jupiter_cloud_planittesting_com(String url) {
         exe.goToUrl(url);
+        exe.goToContactPage("xpath");
     }
 
     @When("Submitting the form leaving the fields NULL")

@@ -23,18 +23,10 @@ public class getConfig {
 			logType = "",
 			secretFile = "";
 	
-	String user1Element	= "",
-			user2Element 	= "",
-			passElement 	= "",
-			frame1IDElement = "",
-			quoteCSSElement = "",
-			brokerHistoryCSSElement = "",
-			submitElem = "",
-			resultsTableElement = "";
+	String contactpage = "";
 	
 	
 	String configPath = "src/main/java/com/planitestexam/bdd/config/";
-	String config = "";
 	
 	LogManager log = new LogManager();
 	Properties prop = new Properties();
@@ -126,8 +118,8 @@ public class getConfig {
 			log.info("loading properties for webElements...");
 
 			// get the property value and print it out
-			//user1Element = prop.getProperty("user1");
-			//log.info("user1Element = " + user1Element);
+			contactpage = prop.getProperty("contactpage");
+			log.info("user1Element = " + contactpage);
 
 			input.close();
 
@@ -156,32 +148,8 @@ public class getConfig {
 		return url;
 	}
 	
-	public String getUser1Elem () {
-		return user1Element;
-	}
-	
-	public String getUser2Elem() {
-		return user2Element;
-	}
-	
-	public String getPassElem() {
-		return passElement;
-	}
-	
-	public String getFrame1IDElem() {
-		return frame1IDElement;
-	}
-	
-	public String getQuoteCSSElem() {
-		return quoteCSSElement;
-	}
-	
-	public String getBroHisCSSElem() {
-		return brokerHistoryCSSElement;
-	}
-	
-	public String getSubmitElem() {
-		return submitElem;
+	public String getContactPageElement () {
+		return contactpage;
 	}
 	
 	public LogManager logManager () {
@@ -190,10 +158,6 @@ public class getConfig {
 	
 	public String getWaitingTime() {
 		return time;
-	}
-	
-	public String getResultsTable() {
-		return resultsTableElement;
 	}
 	
 	public String getConfigPath() {
