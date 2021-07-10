@@ -1,6 +1,7 @@
 package com.planitestexam.uitest;
 
 import cucumber.api.java.Before;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -45,5 +46,19 @@ public class UITestStepDefinition {
         System.out.println(Boolean.valueOf(text));
         System.out.println(present);
         assertThat(present).isEqualTo(Boolean.valueOf(text));
+    }
+
+    @When("filling up the contact form")
+    public void fillingUpTheContactForm() {
+        
+    }
+
+    @And("clicking the submit button")
+    public void clickingTheSubmitButton() {
+        
+    }
+
+    @Then("^s?he should get the not get error message any (.*)$")
+    public void heShouldGetTheNotGetErrorMessageAnyERRORMESSAGE() {
     }
 }

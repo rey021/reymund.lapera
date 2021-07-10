@@ -428,3 +428,35 @@
 2021-07-11 01:03:58,494 [main] INFO  - Page load has been complete
 2021-07-11 01:03:58,498 [main] INFO  - Successfully clicked the element
 2021-07-11 01:03:58,502 [main] INFO  - Locator: xpath === Element: /html/body/div[2]/div/form/div/a
+2021-07-11 01:04:00,598 [main] INFO  - Element present having text:By.xpath: /html/body/div[2]/div/form/div/a
+2021-07-11 01:04:00,602 [main] INFO  - Clicking the element... Locator: xpath === Element: /html/body/div[2]/div/form/div/a
+2021-07-11 01:04:00,680 [main] INFO  - Page load has been complete
+2021-07-11 01:04:00,685 [main] INFO  - Successfully clicked the element
+2021-07-11 06:42:32,288 [main] INFO  - src/main/java/com/planitestexam/bdd/config/configuration.txt
+2021-07-11 06:42:32,298 [main] INFO  - loading properties for credentials and url...
+2021-07-11 06:42:32,298 [main] INFO  - driverpath = src/main/java/com/planitestexam/bdd/tools/
+2021-07-11 06:42:32,298 [main] INFO  - webDriver = chromedriver.exe
+2021-07-11 06:42:32,304 [main] INFO  - SystemProperty = webdriver.chrome.driver
+2021-07-11 06:42:32,309 [main] INFO  - waiting time = 180
+2021-07-11 06:42:32,314 [main] INFO  - url = null
+2021-07-11 06:42:32,314 [main] INFO  - outputDIR = src/main/java/com/planitestexam/bdd/output
+2021-07-11 06:42:32,320 [main] INFO  - outputFileName = uitest.csv
+2021-07-11 06:42:32,320 [main] INFO  - toolsDIR = src/main/java/com/planitestexam/bdd/tools/
+2021-07-11 06:42:32,325 [main] INFO  - configDIR = src/main/java/com/planitestexam/bdd/config/
+2021-07-11 06:42:32,325 [main] INFO  - logType = uitest
+2021-07-11 06:42:32,330 [main] INFO  - secretFile= C:\Users\reymu\Documents\
+2021-07-11 06:42:32,330 [main] INFO  - initialize webElement
+2021-07-11 06:42:32,336 [main] INFO  - src/main/java/com/planitestexam/bdd/config/webElements.txt
+2021-07-11 06:42:32,341 [main] INFO  - loading properties for webElements...
+2021-07-11 06:42:32,341 [main] INFO  - contactpage_submitbutton = //*[@id="nav-contact"]/a
+2021-07-11 06:42:32,346 [main] INFO  - contactPage_errorMessage = /html/body/div[2]/div/form/div/a
+2021-07-11 06:42:34,648 [main] INFO  - Open URL: http://jupiter.cloud.planittesting.com
+2021-07-11 06:42:51,775 [main] INFO  - Page load has been complete
+2021-07-11 06:42:51,783 [main] INFO  - Clicking the element... Locator: xpath === Element: //*[@id="nav-contact"]/a
+2021-07-11 06:42:51,896 [main] INFO  - Page load has been complete
+2021-07-11 06:42:51,904 [main] INFO  - Successfully clicked the element
+2021-07-11 06:42:51,912 [main] INFO  - Locator: xpath === Element: /html/body/div[2]/div/form/div/a
+2021-07-11 06:42:54,050 [main] INFO  - Element present having text:By.xpath: /html/body/div[2]/div/form/div/a
+2021-07-11 06:42:54,058 [main] INFO  - Clicking the element... Locator: xpath === Element: /html/body/div[2]/div/form/div/a
+2021-07-11 06:42:54,179 [main] INFO  - Page load has been complete
+2021-07-11 06:42:54,179 [main] INFO  - Successfully clicked the element

@@ -10,3 +10,12 @@ Feature: Webpage Login Test
       | ERROR MESSAGE |
       | true          |
 
+  Scenario Outline: Test Case#2 check contact page that mandatory fields should required
+    Given User is browsing the contact page of http://jupiter.cloud.planittesting.com
+    When filling up the contact form
+    And clicking the submit button
+    Then he should get the not get error message any <ERROR MESSAGE>
+    Examples:
+      | ERROR MESSAGE |
+      | false          |
+

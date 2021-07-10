@@ -1,6 +1,15 @@
 package com.planitestexam.bdd.uitest;
 
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import javax.swing.text.html.parser.Entity;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class execute {
     SeleniumFlow SE;
@@ -21,6 +30,9 @@ public class execute {
         }
     }
 
+    public execute() {
+    }
+
     void initializeDriver(){
         SE = new SeleniumFlow();
         SE.initialized(config);
@@ -28,7 +40,7 @@ public class execute {
         log.initialize(config.getLogType(), config.getConfigDIR());
     }
 
-    public void run() throws Exception {
+    public void run() {
 
             initializeDriver();
             //SE.closeDriver();
@@ -42,4 +54,12 @@ public class execute {
     public SeleniumFlow getSeleniumFlow(){
         return SE;
     }
+
+// Added sample ===============================
+
+
+
+    // Added sample ===============================
+
+
 } // End of method execute
