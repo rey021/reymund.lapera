@@ -1,1 +1,3 @@
-contactpage=//*[@id="nav-contact"]/a
+home_contactpagebutton=//*[@id="nav-contact"]/a
+contactpage_submitbutton=/html/body/div[2]/div/form/div/a
+contactPage_errorMessage=//*[@id="header-message"]/div

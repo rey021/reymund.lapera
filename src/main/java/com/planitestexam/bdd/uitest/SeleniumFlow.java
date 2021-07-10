@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 
@@ -98,6 +99,8 @@ public class SeleniumFlow {
 				webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
 		log.info("Page load has been complete");
 	}
+
+
 	
 	/*private void waitTime(int sec) {
 		log.info(quote + " ===> wait for " + sec + " seconds");
@@ -130,12 +133,29 @@ public class SeleniumFlow {
 
 	} // end of closeDriver method
 
-	public void clickElement(String locator, String id) {
+	public void waitUntilElementIsPresent(String locator, String id ){
 		log.info("Locator: " + locator + " === " + "Element: " + id );
+		WebDriverWait w = new WebDriverWait(driver,Long.parseLong(config.getWaitingTime()));
+		// presenceOfElementLocated condition
+		w.until(ExpectedConditions.presenceOfElementLocated (findBy(locator, id)));
+		log.info("Element present having text:" + findBy(locator, id).toString());
+	}
+
+	private By findBy(String locator, String id) {
+		By by = null;
+		if (locator.toLowerCase() == "xpath"){
+			by = By.xpath(id);
+		}
+		return by;
+	}
+
+	public void clickElement(String locator, String id) {
+		log.info("Clicking the element... Locator: " + locator + " === " + "Element: " + id );
 		findElement(locator, id);
 		WebElement element =  findElement(locator, id);
 		element.click();
 		waitUntilLoaded();
+		log.info("Successfully clicked the element");
 	}
 
 	private WebElement findElement(String locator, String id) {
@@ -144,5 +164,9 @@ public class SeleniumFlow {
 			element = driver.findElement(By.xpath(id));
 		}
 		return element;
+	}
+
+	public boolean isElementIsPresent(String locator, String id) {
+		return !driver.findElements(findBy(locator, id)).isEmpty();
 	}
 } // End of SeleniumFlow Class
