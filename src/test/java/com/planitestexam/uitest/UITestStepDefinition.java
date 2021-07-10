@@ -16,7 +16,8 @@ import java.util.List;
 public class UITestStepDefinition {
 
     execute exe = new execute();
-    private SiteCatalog siteCatalog = new SiteCatalog();
+    getConfig config;
+    SeleniumFlow SE;
 
     @Before
     public void initializeSelenium() throws Exception {
