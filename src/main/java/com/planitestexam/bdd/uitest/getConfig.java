@@ -51,7 +51,7 @@ public class getConfig {
 	
 		try {
 			
-			log.initialize("brokerwatch", configPath);
+			log.initialize("uitest", configPath);
 			log.info(configPath + "configuration.txt");
 			
 			input = new FileInputStream(configPath + "configuration.txt");
