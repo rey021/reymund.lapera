@@ -7,7 +7,7 @@ import java.util.Properties;
 
 
 public class getConfig {
-	
+
 	String	driverpath = "",
 			webDriver = "",
 			systemProperty = "",
@@ -23,7 +23,9 @@ public class getConfig {
 			logType = "",
 			secretFile = "";
 	
-	String contactpage = "";
+	String home_contactpagebutton = "",
+			contactpage_submitbutton = "",
+			contactPage_errorMessage = "";
 	
 	
 	String configPath = "src/main/java/com/planitestexam/bdd/config/";
@@ -73,7 +75,6 @@ public class getConfig {
 			outputFileName = prop.getProperty("outputFileName");
 			log.info("outputFileName = " + outputFileName);
 
-			
 			toolsDIR = prop.getProperty("toolsDIR");
 			log.info("toolsDIR = " + toolsDIR);
 			
@@ -118,8 +119,14 @@ public class getConfig {
 			log.info("loading properties for webElements...");
 
 			// get the property value and print it out
-			contactpage = prop.getProperty("contactpage");
-			log.info("user1Element = " + contactpage);
+			home_contactpagebutton = prop.getProperty("home_contactpagebutton");
+
+
+			contactpage_submitbutton = prop.getProperty("contactpage_submitbutton");
+			log.info("contactpage_submitbutton = " + home_contactpagebutton);
+
+			contactPage_errorMessage = prop.getProperty("contactPage_errorMessage");
+			log.info("contactPage_errorMessage = " + contactpage_submitbutton);
 
 			input.close();
 
@@ -146,10 +153,6 @@ public class getConfig {
 	
 	public String getUrl() {
 		return url;
-	}
-	
-	public String getContactPageElement () {
-		return contactpage;
 	}
 	
 	public LogManager logManager () {
@@ -200,4 +203,8 @@ public class getConfig {
 	}
 
 	public String getSystemProperty() { return systemProperty; }
+
+	public String getContactPageElement () { return home_contactpagebutton; }
+	public String getContactpageSubmitButtonElement() { return contactpage_submitbutton;}
+	public String getContactPageErrorMessageElement() { return contactPage_errorMessage;}
 }

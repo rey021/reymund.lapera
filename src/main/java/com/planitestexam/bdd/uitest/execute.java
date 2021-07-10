@@ -35,11 +35,11 @@ public class execute {
 
         }//End of method run
 
-    public void goToUrl(String url){
-        SE.goToSite(url);
+    public getConfig getConfig(){
+        return config;
     }
 
-    public void goToContactPage(String locator){
-        SE.clickElement(locator, config.getContactPageElement());
+    public SeleniumFlow getSeleniumFlow(){
+        return SE;
     }
 } // End of method execute
