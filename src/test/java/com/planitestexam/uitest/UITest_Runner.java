@@ -10,7 +10,6 @@ import org.junit.runner.RunWith;
         glue = "com.planitestexam.uitest",
         plugin = { "pretty", "html:target/html-reports",
                 "json:target/cucumber.json",
-                "junit,target/cucumber.xml",
                 "rerun:target/rerun.txt"
         }
 )

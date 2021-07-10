@@ -7,6 +7,7 @@ import cucumber.api.java.en.When;
 import com.planitestexam.bdd.uitest.execute;
 import com.planitestexam.bdd.uitest.getConfig;
 import com.planitestexam.bdd.uitest.SeleniumFlow;
+import org.junit.runners.Parameterized;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,7 +25,6 @@ public class UITestStepDefinition {
         SE = exe.getSeleniumFlow();
     }
 
-
     @Given("User is browsing the contact page of (.*)")
     public void guest_is_browsing_the_contact_page_of_http_jupiter_cloud_planittesting_com(String url) {
         SE.goToSite(url);
@@ -32,15 +32,17 @@ public class UITestStepDefinition {
         SE.waitUntilElementIsPresent("xpath", config.getContactpageSubmitButtonElement());
     }
 
-    @When("Submitting the form leaving the fields NULL")
+    @When("Submitting the form leaving the fields as null")
     public void submitting_the_form_leaving_the_fields_NULL() {
         SE.clickElement("xpath", config.getContactpageSubmitButtonElement());
         //SE.delay(5);
     }
 
-    @Then("he should get the ERROR message")
-    public void he_should_get_the_ERROR_message() {
+    @Then("^s?he should get the error message as (.*)$")
+    public void he_should_get_the_ERROR_message(String text) {
         boolean present = SE.isElementIsPresent("xpath", config.getContactPageErrorMessageElement());
-        assertThat(present).isEqualTo(true);
+        System.out.println(Boolean.valueOf(text));
+        System.out.println(present);
+        assertThat(present).isEqualTo(Boolean.valueOf(text));
     }
 }
