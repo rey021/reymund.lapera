@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
                 "json:target/cucumber.json",
                 "rerun:target/rerun.txt"
         },
-        tags = { "@testcase2" }
+        tags = { "@testcase3" }
 )
 public class UITest_Runner {
 }

@@ -73,4 +73,46 @@ public class UITestStepDefinition {
     @When("leaving fields as blank")
     public void leavingFieldsAsBlank() {
     }
+
+    @Given("User is navigating to shop page")
+    public void user_is_navigating_to_shop_page() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new cucumber.api.PendingException();
+    }
+
+    @When("adding the following item to cart Funny Cow <QUANTITY>")
+    public void adding_the_following_item_to_cart_Funny_Cow_QUANTITY(io.cucumber.datatable.DataTable dataTable) {
+        // Write code here that turns the phrase above into concrete actions
+        // For automatic transformation, change DataTable to one of
+        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
+        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
+        // Double, Byte, Short, Long, BigInteger or BigDecimal.
+        //
+        // For other transformations you can register a DataTableType.
+        throw new cucumber.api.PendingException();
+    }
+
+    @When("clicking the cart menu")
+    public void clicking_the_cart_menu() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new cucumber.api.PendingException();
+    }
+
+    @Then("he should able to validate the correct item into the cart page")
+    public void he_should_able_to_validate_the_correct_item_into_the_cart_page() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new cucumber.api.PendingException();
+    }
+
+    @When("adding the following item to cart Fluffy Bunny < QUANTITY>")
+    public void adding_the_following_item_to_cart_Fluffy_Bunny_QUANTITY(io.cucumber.datatable.DataTable dataTable) {
+        // Write code here that turns the phrase above into concrete actions
+        // For automatic transformation, change DataTable to one of
+        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
+        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
+        // Double, Byte, Short, Long, BigInteger or BigDecimal.
+        //
+        // For other transformations you can register a DataTableType.
+        throw new cucumber.api.PendingException();
+    }
 }

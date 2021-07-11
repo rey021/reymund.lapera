@@ -7,3 +7,4 @@ email=//*[@id="email"]
 telephone=//*[@id="telephone"]
 message=//*[@id="message"]
 contact_success_message=/html/body/div[2]/div/div[@class="alert alert-success"]
+back_button=/html/body/div[2]/div/a
