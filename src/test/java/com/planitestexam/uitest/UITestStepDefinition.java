@@ -34,13 +34,11 @@ public class UITestStepDefinition {
         SE = exe.getSeleniumFlow();
         webelements = config.readFileElements();
     }
-/*
-    @After
-    public void closeDriver() throws Exception {
-        SE.closeDriver();
-    }
 
- */
+   // @After
+    //public void closeDriver() throws Exception {
+   //     SE.closeDriver();
+   // }
 
     @Given("Given User is on the (.*)")
     public void givenUserIsOnTheHttpJupiterCloudPlanittestingCom(String url) {
@@ -129,7 +127,13 @@ public class UITestStepDefinition {
                         SE.clickElement("xpath", webelements.get("buy_button_funny_cow"));
                         break;
                     case "Fluffy Bunny":
-                        SE.clickElement("xpath", webelements.get("but_button_fluffy_cow"));
+                        SE.clickElement("xpath", webelements.get("buy_button_fluffy_cow"));
+                        break;
+                    case "Stuffed Frog":
+                        SE.clickElement("xpath", webelements.get("buy_button_stuffed_frog"));
+                        break;
+                    case "Valentine Bear":
+                        SE.clickElement("xpath", webelements.get("buy_button_valentine_bear"));
                         break;
                 }
             }

@@ -12,6 +12,8 @@ navigate_shop_button=//*[@id="nav-shop"]/a
 shop_page=/html/body/div[2]/div[@class="products ng-scope"]
 buy_button_funny_cow=//*[@id="product-6"]/div/p/a[contains(text(),"Buy")]
 navigate_cart_button=//*[@id="nav-cart"]/a
-but_button_fluffy_cow=//*[@id="product-4"]/div/p/a
+buy_button_fluffy_cow=//*[@id="product-4"]/div/p/a
 added_cart_funny_cow=//td[contains(text(),"Funny Cow")]
 added_cart_fluffy_bunny=//td[contains(text(),"Fluffy Bunny")]
+buy_button_stuffed_frog=//*[@id="product-2"]/div/p/a
+buy_button_valentine_bear=//*[@id="product-7"]/div/p/a
