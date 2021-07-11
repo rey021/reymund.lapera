@@ -35,11 +35,6 @@ public class SeleniumFlow {
 	
 	getConfig config = null;
 	LogManager log = null;
-	FileHandler fh = new FileHandler();
-	static String quote = "";
-	String FileHeader="";
-	String DateFile;
-	String stockListFile;
 
 		
 	public void initialized(getConfig config) {
@@ -83,13 +78,6 @@ public class SeleniumFlow {
 				e.printStackTrace();
 			}
 			
-		}
-		else
-		{
-			log.info(quote + " ===> Switching to default content frame");
-			driver.switchTo().defaultContent();
-			//log.info("Successfully switched to default content frame");
-			waitUntilLoaded();
 		}
 	}
 	
@@ -169,4 +157,23 @@ public class SeleniumFlow {
 	public boolean isElementIsPresent(String locator, String id) {
 		return !driver.findElements(findBy(locator, id)).isEmpty();
 	}
+
+	public String getText(String locator, String id){
+		log.info("ACTION: GETTEXT, LOCATOR: " + locator + " ID: " + id);
+		String text = findElement(locator, id).getText();
+		log.info("GETTEXT Value = " + text);
+		return text;
+	}
+
+	public void setText(String locator, String id, String value){
+		log.info("ACTION: Set text, locator: " + locator + " ID: " + id + " value: " + value);
+		WebElement element =  findElement(locator, id);
+		element.sendKeys(value);
+		log.info("SETTEXT has been executed");
+	}
+
+	public void delay(int seconds){
+		driver.manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
+	}
+
 } // End of SeleniumFlow Class

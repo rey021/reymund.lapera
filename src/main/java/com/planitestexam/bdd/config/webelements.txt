@@ -1,3 +1,9 @@
 home_contactpagebutton=//*[@id="nav-contact"]/a
 contactpage_submitbutton=/html/body/div[2]/div/form/div/a
 contactPage_errorMessage=//*[@id="header-message"]/div
+forename=//*[@id="forename"]
+surname=//*[@id="surname"]
+email=//*[@id="email"]
+telephone=//*[@id="telephone"]
+message=//*[@id="message"]
+contact_success_message=/html/body/div[2]/div/div

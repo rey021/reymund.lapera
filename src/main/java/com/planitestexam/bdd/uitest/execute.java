@@ -24,7 +24,8 @@ public class execute {
         try {
             config.initializeConfig();
             log.info("initialize webElement");
-            config.initializeWebElements();
+            //System.exit(1);
+            //config.initializeWebElements();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -36,7 +37,6 @@ public class execute {
     void initializeDriver(){
         SE = new SeleniumFlow();
         SE.initialized(config);
-
         log.initialize(config.getLogType(), config.getConfigDIR());
     }
 

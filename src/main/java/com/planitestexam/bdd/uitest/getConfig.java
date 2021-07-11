@@ -1,8 +1,8 @@
 package com.planitestexam.bdd.uitest;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 
@@ -21,7 +21,8 @@ public class getConfig {
 			toolsDIR = "",
 			configDIR = "",
 			logType = "",
-			secretFile = "";
+			secretFile = "",
+			web_elements_objects;
 	
 	String home_contactpagebutton = "",
 			contactpage_submitbutton = "",
@@ -87,6 +88,9 @@ public class getConfig {
 			secretFile= prop.getProperty("secret");
 			log.info("secretFile= " + secretFile);
 
+			web_elements_objects = prop.getProperty("web_elements_objects");
+			log.info("web_elements_objects = " + web_elements_objects);
+
 		} catch (IOException ex) {
 			log.error("error ---> ");
 			ex.printStackTrace();
@@ -101,47 +105,7 @@ public class getConfig {
 			}
 		}
 	}
-	
-	public void initializeWebElements () throws Exception, IOException 
-	{
-		Properties prop = new Properties();
-		InputStream input = null;
-	
-		try {
 
-			log.info(configPath + "webElements.txt");
-			input = new FileInputStream(configPath + "webElements.txt");
-
-			// load a properties file
-			prop.load(input);
-			
-			System.out.println();
-			log.info("loading properties for webElements...");
-
-			// get the property value and print it out
-			home_contactpagebutton = prop.getProperty("home_contactpagebutton");
-
-
-			contactpage_submitbutton = prop.getProperty("contactpage_submitbutton");
-			log.info("contactpage_submitbutton = " + home_contactpagebutton);
-
-			contactPage_errorMessage = prop.getProperty("contactPage_errorMessage");
-			log.info("contactPage_errorMessage = " + contactpage_submitbutton);
-
-			input.close();
-
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	} // End of initializeWebElements Method
 	
 	public String getDriverPath() {
 		return driverpath;
@@ -163,37 +127,6 @@ public class getConfig {
 		return time;
 	}
 	
-	public String getConfigPath() {
-		return configPath;
-	}
-	
-	public String getOutputDIR() {
-		return outputDIR;
-	}
-	
-	public String getOutputFileName() {
-		return outputFileName;
-	}
-
-	
-	public String getTodayDate() {
-		date = java.time.LocalDate.now().toString();
-		System.out.println(java.time.LocalDate.now());
-		return date;
-	}
-	
-	public String getStartDateElement() {
-		return startdate;
-	}
-	
-	public String getEndDateElement() {
-		return enddate;
-	}
-	
-	public String getToolsDIR() {
-		return toolsDIR;
-	}
-	
 	public String getConfigDIR() {
 		return configDIR;
 	}
@@ -204,7 +137,32 @@ public class getConfig {
 
 	public String getSystemProperty() { return systemProperty; }
 
-	public String getContactPageElement () { return home_contactpagebutton; }
-	public String getContactpageSubmitButtonElement() { return contactpage_submitbutton;}
-	public String getContactPageErrorMessageElement() { return contactPage_errorMessage;}
+
+	public Map<String, String> readFileElements() throws IOException {
+		String filePath = web_elements_objects;
+		Map<String, String> map = new HashMap<String, String>();
+
+		String line;
+		BufferedReader reader = new BufferedReader(new FileReader(filePath));
+		while ((line = reader.readLine()) != null)
+		{
+			String[] parts = line.split("=", 2);
+			if (parts.length >= 2)
+			{
+				String key = parts[0];
+				String value = parts[1];
+				map.put(key, value);
+			} else {
+				System.out.println("ignoring line: " + line);
+			}
+		}
+
+		for (String key : map.keySet())
+		{
+			System.out.println(key + ":" + map.get(key));
+		}
+		reader.close();
+
+		return map;
+	}
 }
