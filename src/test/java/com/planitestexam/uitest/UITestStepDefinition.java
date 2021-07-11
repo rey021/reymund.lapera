@@ -42,10 +42,10 @@ public class UITestStepDefinition {
         SE.waitUntilElementIsPresent("xpath", webelements.get("contactpage_submitbutton"));
     }
 
-    @When("clicking the submit button")
+    @And("clicking the submit button")
     public void submitting_the_contact_form() {
         SE.clickElement("xpath", webelements.get("contactpage_submitbutton"));
-        SE.delay(20);
+        SE.waitUntilElementIsPresent("xpath", webelements.get("contactpage_submitbutton"));
     }
 
     @Then("^s?he should get the error message: \"(.*)\"$")
@@ -63,8 +63,8 @@ public class UITestStepDefinition {
         SE.setText("xpath",webelements.get("message"),table.cell(1, 4));
     }
 
-    @Then("^s?he should get the not get error message any (.*)$")
-    public void heShouldGetTheNotGetErrorMessageAnyERRORMESSAGE(String text) {
+    @Then("^s?he should get the success (.*)$")
+    public void heShouldGetTheNotGetErrorMessageAnyERRORMESSAGE(String text) throws InterruptedException {
         SE.waitUntilElementIsPresent("xpath", webelements.get("contact_success_message"));
         String message = SE.getText("xpath",webelements.get("contact_success_message"));
         assertThat(message).isEqualTo(text);

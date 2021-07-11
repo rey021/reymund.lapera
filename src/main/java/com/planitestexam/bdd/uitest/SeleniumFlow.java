@@ -172,8 +172,11 @@ public class SeleniumFlow {
 		log.info("SETTEXT has been executed");
 	}
 
-	public void delay(int seconds){
-		driver.manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
+	public void delay() throws InterruptedException {
+		log.info("start wait");
+		Thread.sleep(20000);
+		log.info("end wait");
 	}
+
 
 } // End of SeleniumFlow Class

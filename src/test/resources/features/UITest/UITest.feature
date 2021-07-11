@@ -22,8 +22,7 @@ Feature: Webpage Login Test
         | FORENAME | SURNAME | EMAIL          | TELEPHONE | MESSAGE        |
         | test     | test    | test@gmail.com | 63999231  | this is a test |
     And clicking the submit button
-    Then he should get the not get error message any <RESPONSE MESSAGE>
+    Then he should get the success <RESPONSE MESSAGE>
     Examples:
       | RESPONSE MESSAGE                          |
       | Thanks test, we appreciate your feedback. |
-
