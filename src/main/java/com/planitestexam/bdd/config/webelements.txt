@@ -8,4 +8,10 @@ telephone=//*[@id="telephone"]
 message=//*[@id="message"]
 contact_success_message=/html/body/div[2]/div/div[@class="alert alert-success"]
 back_button=/html/body/div[2]/div/a
-nav_shop=//*[@id="nav-shop"]/a
+navigate_shop_button=//*[@id="nav-shop"]/a
+shop_page=/html/body/div[2]/div[@class="products ng-scope"]
+buy_button_funny_cow=//*[@id="product-6"]/div/p/a[contains(text(),"Buy")]
+navigate_cart_button=//*[@id="nav-cart"]/a
+but_button_fluffy_cow=//*[@id="product-4"]/div/p/a
+added_cart_funny_cow=//td[contains(text(),"Funny Cow")]
+added_cart_fluffy_bunny=//td[contains(text(),"Fluffy Bunny")]

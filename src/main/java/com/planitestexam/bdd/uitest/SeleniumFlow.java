@@ -154,8 +154,9 @@ public class SeleniumFlow {
 		return element;
 	}
 
-	public boolean isElementIsPresent(String locator, String id) {
-		return !driver.findElements(findBy(locator, id)).isEmpty();
+	public boolean isElementIsPresent(String locator, String id) throws InterruptedException {
+		Thread.sleep(7000);
+		return driver.findElement(findBy(locator, id)).isDisplayed();
 	}
 
 	public String getText(String locator, String id){

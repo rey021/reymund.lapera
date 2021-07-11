@@ -1,5 +1,6 @@
 package com.planitestexam.uitest;
 
+import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -14,6 +15,7 @@ import io.cucumber.datatable.DataTable;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class UITestStepDefinition {
@@ -22,6 +24,8 @@ public class UITestStepDefinition {
     getConfig config;
     SeleniumFlow SE;
     Map<String, String> webelements = new HashMap<String, String>();
+    ContactForm contactForm = new ContactForm();
+    Map<String,String> items = new HashMap<String, String>();
 
     @Before
     public void initializeSelenium() throws Exception {
@@ -30,6 +34,13 @@ public class UITestStepDefinition {
         SE = exe.getSeleniumFlow();
         webelements = config.readFileElements();
     }
+/*
+    @After
+    public void closeDriver() throws Exception {
+        SE.closeDriver();
+    }
+
+ */
 
     @Given("Given User is on the (.*)")
     public void givenUserIsOnTheHttpJupiterCloudPlanittestingCom(String url) {
@@ -54,19 +65,34 @@ public class UITestStepDefinition {
         assertThat(message).isEqualTo(text);
     }
 
-    @When("filling up the contact form on the following fields:")
-    public void fillingUpTheContactForm(DataTable table) {
-        SE.setText("xpath",webelements.get("forename"),table.cell(1, 0));
-        SE.setText("xpath",webelements.get("surname"),table.cell(1, 1));
-        SE.setText("xpath",webelements.get("email"),table.cell(1, 2));
-        SE.setText("xpath",webelements.get("telephone"),table.cell(1, 3));
-        SE.setText("xpath",webelements.get("message"),table.cell(1, 4));
+    @When("^filling up the contact form on the following fields (.*) , (.*) , (.*) , (.*) , (.*)$")
+    public void fillingUpTheContactForm(String forename, String surname, String email, String telephone,  String message  ) {
+
+        contactForm.setForename(forename);
+        contactForm.setSurname(surname);
+        contactForm.setTelephone(telephone);
+        contactForm.setEmail(email);
+        contactForm.setMessage(message);
+
+        SE.setText("xpath",webelements.get("forename"),forename);
+        SE.setText("xpath",webelements.get("surname"), surname);
+        SE.setText("xpath",webelements.get("email"), telephone);
+        SE.setText("xpath",webelements.get("telephone"), email);
+        SE.setText("xpath",webelements.get("message"), message);
     }
 
     @Then("^s?he should get the success (.*)$")
-    public void heShouldGetTheNotGetErrorMessageAnyERRORMESSAGE(String text) throws InterruptedException {
-        SE.waitUntilElementIsPresent("xpath", webelements.get("contact_success_message"));
-        String message = SE.getText("xpath",webelements.get("contact_success_message"));
+    public void checkResponseMessage(String text) throws InterruptedException {
+        String message = "";
+        if (contactForm.getForename().isEmpty() || contactForm.getSurname().isEmpty() || contactForm.getEmail().isEmpty() ||
+        contactForm.getTelephone().isEmpty()){
+            SE.waitUntilElementIsPresent("xpath", webelements.get("contactPage_errorMessage"));
+            message = SE.getText("xpath",webelements.get("contactPage_errorMessage"));
+        }
+        else {
+            SE.waitUntilElementIsPresent("xpath", webelements.get("contact_success_message"));
+            message = SE.getText("xpath",webelements.get("contact_success_message"));
+        }
         assertThat(message).isEqualTo(text);
     }
 
@@ -76,43 +102,37 @@ public class UITestStepDefinition {
 
     @Given("User is navigating to shop page")
     public void user_is_navigating_to_shop_page() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new cucumber.api.PendingException();
+        SE.clickElement("xpath",webelements.get("navigate_shop_button"));
+        SE.waitUntilElementIsPresent("xpath",webelements.get("shop_page"));
     }
 
-    @When("adding the following item to cart Funny Cow <QUANTITY>")
-    public void adding_the_following_item_to_cart_Funny_Cow_QUANTITY(io.cucumber.datatable.DataTable dataTable) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        throw new cucumber.api.PendingException();
+    @Then("verify item has been added to cart")
+    public void viewingTheCartMenuVerifyHavingAnd() throws InterruptedException {
+
+        SE.clickElement("xpath",webelements.get("navigate_cart_button"));
+        SE.waitUntilElementIsPresent("xpath",webelements.get("navigate_cart_button"));
+        boolean elementPresent = SE.isElementIsPresent("xpath",webelements.get("added_cart_funny_cow"));
+        assertThat(elementPresent).isEqualTo(true);
+        elementPresent = SE.isElementIsPresent("xpath",webelements.get("added_cart_fluffy_bunny"));
+        assertThat(elementPresent).isEqualTo(true);
     }
 
-    @When("clicking the cart menu")
-    public void clicking_the_cart_menu() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new cucumber.api.PendingException();
-    }
+    @When("adding item and quantity on the ff.")
+    public void addingAnd(Map<String,String> dataTable) {
 
-    @Then("he should able to validate the correct item into the cart page")
-    public void he_should_able_to_validate_the_correct_item_into_the_cart_page() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new cucumber.api.PendingException();
-    }
+        for(Map.Entry<String, String> pair : dataTable.entrySet()){
 
-    @When("adding the following item to cart Fluffy Bunny < QUANTITY>")
-    public void adding_the_following_item_to_cart_Fluffy_Bunny_QUANTITY(io.cucumber.datatable.DataTable dataTable) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        throw new cucumber.api.PendingException();
+            for (int x = Integer.parseInt(pair.getValue()); x > 0; x--) {
+
+                switch (pair.getKey()){
+                    case "Funny Cow":
+                        SE.clickElement("xpath", webelements.get("buy_button_funny_cow"));
+                        break;
+                    case "Fluffy Bunny":
+                        SE.clickElement("xpath", webelements.get("but_button_fluffy_cow"));
+                        break;
+                }
+            }
+        }
     }
 }

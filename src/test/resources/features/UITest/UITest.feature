@@ -19,5 +19,7 @@ Feature: Webpage Login Test
   @testcase3
   Scenario: Test Case#3 Able to add item to cart
     Given User is navigating to shop page
-    When adding 2 "Funny Cow" and 1 "Fluffy Bunny"
-    Then viewing the cart menu verify having 2 "Funny Cow" and 1 "Fluffy Bunny"
+    When adding item and quantity on the ff.
+      | Funny Cow    | 2        |
+      | Fluffy Bunny | 1        |
+    Then verify item has been added to cart
