@@ -5,6 +5,7 @@ waittime=180
 outputDIR = src/main/java/com/planitestexam/bdd/output
 toolsDIR=src/main/java/com/planitestexam/bdd/tools/
 configDIR=src/main/java/com/planitestexam/bdd/config/
+web_elements_objects=src/main/java/com/planitestexam/bdd/config/webelements.txt
 outputFileName = uitest.csv
 logType=uitest
 secret=C\:\\Users\\reymu\\Documents\\
