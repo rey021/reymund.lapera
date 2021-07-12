@@ -21,4 +21,5 @@
 ================================================
 
 ###Notes: runner --> UITest_Runner
+#### notes: about testcase2 mentioning to run 5 times to increase the passing rate is <strong>"not a really a good approach"</strong> when using BDD, thats why i didnt do it here.
 ####Testcases Tag: testcase1&2, testcase3, testcase4
