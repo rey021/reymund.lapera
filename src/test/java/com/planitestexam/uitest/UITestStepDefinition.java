@@ -1,5 +1,7 @@
 package com.planitestexam.uitest;
 
+import com.planitestexam.bdd.implementation.*;
+import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -8,13 +10,19 @@ import cucumber.api.java.en.When;
 import com.planitestexam.bdd.uitest.execute;
 import com.planitestexam.bdd.uitest.getConfig;
 import com.planitestexam.bdd.uitest.SeleniumFlow;
-import io.cucumber.datatable.DataTable;
+import static org.junit.Assert.*;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UITestStepDefinition {
 
@@ -22,6 +30,10 @@ public class UITestStepDefinition {
     getConfig config;
     SeleniumFlow SE;
     Map<String, String> webelements = new HashMap<String, String>();
+    ContactForm contactForm = new ContactForm();
+    Map<String, String> items = new HashMap<String, String>();
+    Catalogue catalogue = new Catalogue();
+    ShoppingCart cart = new ShoppingCart();
 
     @Before
     public void initializeSelenium() throws Exception {
@@ -31,42 +43,61 @@ public class UITestStepDefinition {
         webelements = config.readFileElements();
     }
 
+    @After
+    public void closeDriver() throws Exception {
+         SE.closeDriver();
+    }
+
     @Given("Given User is on the (.*)")
     public void givenUserIsOnTheHttpJupiterCloudPlanittestingCom(String url) {
         SE.goToSite(url);
     }
 
     @Given("User is navigating the contact page")
-    public void guest_is_browsing_the_contact_page_of_http_jupiter_cloud_planittesting_com() {
-        SE.clickElement("xpath",webelements.get("home_contactpagebutton"));
+    public void guest_is_browsing_the_contact_page_of_http_jupiter_cloud_planittesting_com() throws InterruptedException {
+        SE.clickElement("xpath", webelements.get("home_contactpagebutton"));
         SE.waitUntilElementIsPresent("xpath", webelements.get("contactpage_submitbutton"));
     }
 
     @And("clicking the submit button")
-    public void submitting_the_contact_form() {
+    public void submitting_the_contact_form() throws InterruptedException {
         SE.clickElement("xpath", webelements.get("contactpage_submitbutton"));
         SE.waitUntilElementIsPresent("xpath", webelements.get("contactpage_submitbutton"));
     }
 
     @Then("^s?he should get the error message: \"(.*)\"$")
     public void he_should_get_the_ERROR_message(String text) {
-        String message = SE.getText("xpath",webelements.get("contactPage_errorMessage"));
+        String message = SE.getText("xpath", webelements.get("contactPage_errorMessage"));
         assertThat(message).isEqualTo(text);
     }
 
-    @When("filling up the contact form on the following fields:")
-    public void fillingUpTheContactForm(DataTable table) {
-        SE.setText("xpath",webelements.get("forename"),table.cell(1, 0));
-        SE.setText("xpath",webelements.get("surname"),table.cell(1, 1));
-        SE.setText("xpath",webelements.get("email"),table.cell(1, 2));
-        SE.setText("xpath",webelements.get("telephone"),table.cell(1, 3));
-        SE.setText("xpath",webelements.get("message"),table.cell(1, 4));
+    @When("^filling up the contact form on the following fields (.*) , (.*) , (.*) , (.*) , (.*)$")
+    public void fillingUpTheContactForm(String forename, String surname, String email, String telephone, String message) {
+
+        contactForm.setForename(forename);
+        contactForm.setSurname(surname);
+        contactForm.setTelephone(telephone);
+        contactForm.setEmail(email);
+        contactForm.setMessage(message);
+
+        SE.setText("xpath", webelements.get("forename"), forename);
+        SE.setText("xpath", webelements.get("surname"), surname);
+        SE.setText("xpath", webelements.get("email"), telephone);
+        SE.setText("xpath", webelements.get("telephone"), email);
+        SE.setText("xpath", webelements.get("message"), message);
     }
 
     @Then("^s?he should get the success (.*)$")
-    public void heShouldGetTheNotGetErrorMessageAnyERRORMESSAGE(String text) throws InterruptedException {
-        SE.waitUntilElementIsPresent("xpath", webelements.get("contact_success_message"));
-        String message = SE.getText("xpath",webelements.get("contact_success_message"));
+    public void checkResponseMessage(String text) throws InterruptedException {
+        String message = "";
+        if (contactForm.getForename().isEmpty() || contactForm.getSurname().isEmpty() || contactForm.getEmail().isEmpty() ||
+                contactForm.getTelephone().isEmpty()) {
+            SE.waitUntilElementIsPresent("xpath", webelements.get("contactPage_errorMessage"));
+            message = SE.getText("xpath", webelements.get("contactPage_errorMessage"));
+        } else {
+            SE.waitUntilElementIsPresent("xpath", webelements.get("contact_success_message"));
+            message = SE.getText("xpath", webelements.get("contact_success_message"));
+        }
         assertThat(message).isEqualTo(text);
     }
 
@@ -75,44 +106,139 @@ public class UITestStepDefinition {
     }
 
     @Given("User is navigating to shop page")
-    public void user_is_navigating_to_shop_page() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new cucumber.api.PendingException();
+    public void user_is_navigating_to_shop_page() throws InterruptedException {
+        SE.clickElement("xpath", webelements.get("navigate_shop_button"));
+        SE.waitUntilElementIsPresent("xpath", webelements.get("shop_page"));
     }
 
-    @When("adding the following item to cart Funny Cow <QUANTITY>")
-    public void adding_the_following_item_to_cart_Funny_Cow_QUANTITY(io.cucumber.datatable.DataTable dataTable) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        throw new cucumber.api.PendingException();
+    @Then("verify item has been added to cart")
+    public void viewingTheCartMenuVerifyHavingAnd() throws InterruptedException {
+
+        SE.clickElement("xpath", webelements.get("navigate_cart_button"));
+        SE.waitUntilElementIsPresent("xpath", webelements.get("navigate_cart_button"));
+        boolean elementPresent = SE.isElementIsPresent("xpath", webelements.get("added_cart_funny_cow"));
+        assertThat(elementPresent).isEqualTo(true);
+        elementPresent = SE.isElementIsPresent("xpath", webelements.get("added_cart_fluffy_bunny"));
+        assertThat(elementPresent).isEqualTo(true);
     }
 
-    @When("clicking the cart menu")
-    public void clicking_the_cart_menu() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new cucumber.api.PendingException();
+    @When("adding item and quantity on the ff.")
+    public void addingAnd(Map<String, String> dataTable) {
+
+        for (Map.Entry<String, String> pair : dataTable.entrySet()) {
+
+            for (int x = Integer.parseInt(pair.getValue()); x > 0; x--) {
+
+                switch (pair.getKey()) {
+                    case "Funny Cow":
+                        SE.clickElement("xpath", webelements.get("buy_button_funny_cow"));
+                        break;
+                    case "Fluffy Bunny":
+                        SE.clickElement("xpath", webelements.get("buy_button_fluffy_cow"));
+                        break;
+                    case "Stuffed Frog":
+                        SE.clickElement("xpath", webelements.get("buy_button_stuffed_frog"));
+                        break;
+                    case "Valentine Bear":
+                        SE.clickElement("xpath", webelements.get("buy_button_valentine_bear"));
+                        break;
+                }
+            }
+        }
     }
 
-    @Then("he should able to validate the correct item into the cart page")
-    public void he_should_able_to_validate_the_correct_item_into_the_cart_page() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new cucumber.api.PendingException();
+    @And("adding the following item, and quantity")
+    public void pricesForEachItemAreTheFollowing(List<Map<String, String>> dataTable) {
+
+        dataTable.stream().forEach(
+                map -> {
+                    String item = map.get("Item");
+                    Float price = Float.parseFloat(map.get("Price"));
+                    Integer quantity = Integer.parseInt(map.get("Quantity"));
+
+                    catalogue.setProduct(item,new PhysicalProduct(item, price));
+
+                    System.out.println("PRICE === " + price);
+                    Product myItem = Catalogue.getProduct(item);
+                    cart.addLineItem(new LineItem(myItem, quantity));
+
+                    for (int x = quantity; x > 0 ; x --){
+                        SE.clickElement("xpath", webelements.get(item));
+                    }
+
+                }
+        );
     }
 
-    @When("adding the following item to cart Fluffy Bunny < QUANTITY>")
-    public void adding_the_following_item_to_cart_Fluffy_Bunny_QUANTITY(io.cucumber.datatable.DataTable dataTable) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        throw new cucumber.api.PendingException();
+    @Then("verify item has been added to cart with correct sub_total of each item and total cost")
+    public void verifyItemHasBeenAddedToCartWithTotalCost() throws InterruptedException {
+
+        DecimalFormat df = new DecimalFormat("###.#");
+        BigDecimal totalCostToBigDecimal = new BigDecimal(Double.toString(cart.getTotalCost()));
+        totalCostToBigDecimal = totalCostToBigDecimal.setScale(2, RoundingMode.HALF_UP);
+
+        SE.clickElement("xpath", webelements.get("navigate_cart_button"));
+        SE.waitUntilElementIsPresent("xpath", webelements.get("navigate_cart_button"));
+
+        int count = 1;
+        cart.getLineItems().stream().forEach(
+                items -> {
+
+                    Product item = items.getProduct();
+                    int counter = 1 ;
+                    for (int x = counter; x < cart.getLineItems().size()+1; x++){
+                        String displayItem = SE.getText("xpath", "/html/body/div[2]/div/form/table/tbody/tr["
+                                + counter + "]/td[1]");
+                        if (displayItem.equals(item.getName())){
+
+                            String subTotalDisplay= SE.getText("xpath",webelements.get("subTotalLine" + count));
+
+                            BigDecimal subTotalToBigDecimal = new BigDecimal(Double.toString(items.getPrice()));
+                            subTotalToBigDecimal = subTotalToBigDecimal.setScale(2, RoundingMode.HALF_UP);
+
+                            assertEquals(subTotalDisplay,"$"+subTotalToBigDecimal); // Validate subtotal of each lineItem
+
+                            break;
+                        }
+                    }
+                }
+        );
+
+        System.out.println("Computed Total Cost ===  + " + totalCostToBigDecimal);
+        System.out.println("Display on Webpage totalCost == " + SE.getText("xpath",webelements.get("totalPrice")));
+
+        String totalCost = regex(SE.getText("xpath",webelements.get("totalPrice")),"(?<=\\s).*");
+
+        if (checkIfOneDecimal(totalCost)){
+            assertEquals(totalCost,df.format(totalCostToBigDecimal));
+        }
+        else
+        {
+            assertEquals(totalCost,totalCostToBigDecimal.toString());
+        }
     }
-}
+
+    private boolean checkIfOneDecimal(String totalCost) {
+
+        boolean status = false;
+        int indexOfDecimal = totalCost.indexOf(".")+1;
+
+        if(((totalCost.length() - indexOfDecimal)) == 1) {
+            status = true;
+        }
+        return status;
+    }
+
+    private String regex(String value, String regex)
+    {
+        Pattern p = Pattern.compile(regex);//. represents single character
+        Matcher m = p.matcher(value);
+        String result = "";
+
+        if (m.find()){
+            return m.group(0);
+        }
+        return null;
+    } // End of method regex
+
+}//End of class

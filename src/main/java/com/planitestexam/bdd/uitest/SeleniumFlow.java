@@ -121,12 +121,13 @@ public class SeleniumFlow {
 
 	} // end of closeDriver method
 
-	public void waitUntilElementIsPresent(String locator, String id ){
+	public void waitUntilElementIsPresent(String locator, String id ) throws InterruptedException {
 		log.info("Locator: " + locator + " === " + "Element: " + id );
 		WebDriverWait w = new WebDriverWait(driver,Long.parseLong(config.getWaitingTime()));
 		// presenceOfElementLocated condition
 		w.until(ExpectedConditions.presenceOfElementLocated (findBy(locator, id)));
 		log.info("Element present having text:" + findBy(locator, id).toString());
+		Thread.sleep(3000);
 	}
 
 	private By findBy(String locator, String id) {
@@ -154,8 +155,9 @@ public class SeleniumFlow {
 		return element;
 	}
 
-	public boolean isElementIsPresent(String locator, String id) {
-		return !driver.findElements(findBy(locator, id)).isEmpty();
+	public boolean isElementIsPresent(String locator, String id) throws InterruptedException {
+		Thread.sleep(7000);
+		return driver.findElement(findBy(locator, id)).isDisplayed();
 	}
 
 	public String getText(String locator, String id){
