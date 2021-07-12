@@ -11,8 +11,8 @@ import org.junit.runner.RunWith;
         plugin = { "pretty", "html:target/html-reports",
                 "json:target/cucumber.json",
                 "rerun:target/rerun.txt"
-        },
-        tags = { "@testcase4" }
+        }
+        //tags = { "@testcase4" }
 )
 public class UITest_Runner {
 }

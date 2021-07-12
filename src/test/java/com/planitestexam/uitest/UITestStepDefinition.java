@@ -25,6 +25,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UITestStepDefinition {
 
@@ -45,10 +47,10 @@ public class UITestStepDefinition {
         webelements = config.readFileElements();
     }
 
-    // @After
-    //public void closeDriver() throws Exception {
-    //     SE.closeDriver();
-    // }
+    @After
+    public void closeDriver() throws Exception {
+         SE.closeDriver();
+    }
 
     @Given("Given User is on the (.*)")
     public void givenUserIsOnTheHttpJupiterCloudPlanittestingCom(String url) {
@@ -127,7 +129,6 @@ public class UITestStepDefinition {
     @When("adding item and quantity on the ff.")
     public void addingAnd(Map<String, String> dataTable) {
 
-//========================
         for (Map.Entry<String, String> pair : dataTable.entrySet()) {
 
             for (int x = Integer.parseInt(pair.getValue()); x > 0; x--) {
@@ -176,8 +177,9 @@ public class UITestStepDefinition {
     @Then("verify item has been added to cart with correct sub_total of each item and total cost")
     public void verifyItemHasBeenAddedToCartWithTotalCost() throws InterruptedException {
 
-        BigDecimal bigDecimal = new BigDecimal(Double.toString(cart.getTotalCost()));
-        bigDecimal = bigDecimal.setScale(2, RoundingMode.HALF_UP);
+        DecimalFormat df = new DecimalFormat("###.#");
+        BigDecimal totalCostToBigDecimal = new BigDecimal(Double.toString(cart.getTotalCost()));
+        totalCostToBigDecimal = totalCostToBigDecimal.setScale(2, RoundingMode.HALF_UP);
 
         SE.clickElement("xpath", webelements.get("navigate_cart_button"));
         SE.waitUntilElementIsPresent("xpath", webelements.get("navigate_cart_button"));
@@ -187,15 +189,59 @@ public class UITestStepDefinition {
                 items -> {
 
                     Product item = items.getProduct();
-                    System.out.println( " Item.getName() === " + item.getName() + " totalSubPrice == " + items.getPrice());
+                    int counter = 1 ;
+                    for (int x = counter; x < cart.getLineItems().size()+1; x++){
+                        String displayItem = SE.getText("xpath", "/html/body/div[2]/div/form/table/tbody/tr["
+                                + counter + "]/td[1]");
+                        if (displayItem.equals(item.getName())){
 
-                    String subTotalDisplay= SE.getText("xpath",webelements.get("subTotalLine" + count));
-                    System.out.println("Assert!!!! ");
-                    System.out.println("End of Assert!!!!! ");
+                            String subTotalDisplay= SE.getText("xpath",webelements.get("subTotalLine" + count));
+                            System.out.println("Assert!!!! ");
+
+                            BigDecimal subTotalToBigDecimal = new BigDecimal(Double.toString(items.getPrice()));
+                            subTotalToBigDecimal = subTotalToBigDecimal.setScale(2, RoundingMode.HALF_UP);
+
+                            assertEquals(subTotalDisplay,"$"+subTotalToBigDecimal); // Validate subtotal of each lineItem
+
+                            break;
+                        }
+                    }
                 }
         );
 
-        //total Cost correct
-        System.out.println("total cost with bigDecimal ===  + " + bigDecimal);
+        System.out.println("Computed Total Cost ===  + " + totalCostToBigDecimal);
+        System.out.println("Display on Webpage totalCost == " + SE.getText("xpath",webelements.get("totalPrice")));
+
+        String totalCost = regex(SE.getText("xpath",webelements.get("totalPrice")),"(?<=\\s).*");
+
+        if (checkIfOneDecimal(totalCost)){
+            assertEquals(totalCost,df.format(totalCostToBigDecimal));
+        }
+        else
+        {
+            assertEquals(totalCost,totalCostToBigDecimal.toString());
+        }
     }
+
+    private boolean checkIfOneDecimal(String totalCost) {
+
+        int indexOfDecimal = totalCost.indexOf(".");
+        if(totalCost.substring(indexOfDecimal).length() == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    private String regex(String value, String regex)
+    {
+        Pattern p = Pattern.compile(regex);//. represents single character
+        Matcher m = p.matcher(value);
+        String result = "";
+
+        if (m.find()){
+            return m.group(0);
+        }
+        return null;
+    } // End of method regex
+
 }//End of class

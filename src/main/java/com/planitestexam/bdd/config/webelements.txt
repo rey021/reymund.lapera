@@ -26,3 +26,4 @@ lineItem3=/html/body/div[2]/div/form/table/tbody/tr[3]/td[1]
 subTotalLine1=/html/body/div[2]/div/form/table/tbody/tr[1]/td[4]
 subTotalLine2=/html/body/div[2]/div/form/table/tbody/tr[2]/td[4]
 subTotalLine3=/html/body/div[2]/div/form/table/tbody/tr[3]/td[4]
+totalPrice=/html/body/div[2]/div/form/table/tfoot/tr[1]/td
