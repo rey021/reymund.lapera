@@ -17,10 +17,6 @@ public class LineItem {
         this(li.product, li.quantity);
     }
 
-    public int calculateShippingCost() {
-        return product.calculateShippingCost() * quantity;
-    }
-
     public Product getProduct() {
         return product;
     }

@@ -5,15 +5,10 @@ import java.util.Date;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
-import common.AlarmDispatch;
-import common.AlarmSender;
-import common.NetInfo;
 import tools.FileHandler;
 
 public class LogManager {
     Logger logger = Logger.getLogger(LogManager.class);
-    AlarmDispatch alarm = new AlarmDispatch ();
-    String ip = NetInfo.getIP ();
     FileHandler fileHandler = new FileHandler();
     String dir = null;   
       
@@ -62,7 +57,6 @@ public class LogManager {
 			Date dateNow = new Date();
 			SimpleDateFormat dateFormat= new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z");
 			String contentDate=dateFormat.format(dateNow);
-			alarm.sendAlarm (moduleID,instance,ip,severity,newmessage,contentDate,errorCode);
 		} catch (Exception e) {
 			logger.error ("Unable to write to alarm file [" + moduleID + "] " + e);
 		}
@@ -80,7 +74,6 @@ public class LogManager {
 			Date dateNow = new Date();
 			SimpleDateFormat dateFormat= new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z");
 			String contentDate=dateFormat.format(dateNow);
-			alarm.sendAlarm (moduleID,instance,ip,severity,newmessage,contentDate,errorCode);
 		} catch (Exception e) {
 			logger.error ("Unable to write to alarm file [" + moduleID + "] " + e);
 		}
@@ -108,8 +101,7 @@ public class LogManager {
 /*---------------------------------------------------------------------------------------------------------------------*/				
 	public synchronized void printErrorLog(String moduleID, String message, String errorID, String severity)
 	{		
-		error(message+"");	
-		AlarmSender.sendAlarm(moduleID,"1",NetInfo.getIP(),severity,message,errorID);
+		error(message+"");
 	}	
 	
 /*---------------------------------------------------------------------------------------------------------------------*/			

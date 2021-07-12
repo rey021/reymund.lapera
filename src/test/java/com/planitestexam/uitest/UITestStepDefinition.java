@@ -10,18 +10,14 @@ import cucumber.api.java.en.When;
 import com.planitestexam.bdd.uitest.execute;
 import com.planitestexam.bdd.uitest.getConfig;
 import com.planitestexam.bdd.uitest.SeleniumFlow;
-import io.cucumber.datatable.DataTable;
 import static org.junit.Assert.*;
-import org.junit.Test;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.net.CacheResponse;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -196,7 +192,6 @@ public class UITestStepDefinition {
                         if (displayItem.equals(item.getName())){
 
                             String subTotalDisplay= SE.getText("xpath",webelements.get("subTotalLine" + count));
-                            System.out.println("Assert!!!! ");
 
                             BigDecimal subTotalToBigDecimal = new BigDecimal(Double.toString(items.getPrice()));
                             subTotalToBigDecimal = subTotalToBigDecimal.setScale(2, RoundingMode.HALF_UP);
@@ -225,11 +220,13 @@ public class UITestStepDefinition {
 
     private boolean checkIfOneDecimal(String totalCost) {
 
-        int indexOfDecimal = totalCost.indexOf(".");
-        if(totalCost.substring(indexOfDecimal).length() == 1) {
-            return true;
+        boolean status = false;
+        int indexOfDecimal = totalCost.indexOf(".")+1;
+
+        if(((totalCost.length() - indexOfDecimal)) == 1) {
+            status = true;
         }
-        return false;
+        return status;
     }
 
     private String regex(String value, String regex)
