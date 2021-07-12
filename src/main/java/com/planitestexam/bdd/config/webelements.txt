@@ -17,3 +17,12 @@ added_cart_funny_cow=//td[contains(text(),"Funny Cow")]
 added_cart_fluffy_bunny=//td[contains(text(),"Fluffy Bunny")]
 buy_button_stuffed_frog=//*[@id="product-2"]/div/p/a
 buy_button_valentine_bear=//*[@id="product-7"]/div/p/a
+Stuffed Frog=//*[@id="product-2"]/div/p/a
+Fluffy Bunny=//*[@id="product-4"]/div/p/a
+Valentine Bear=//*[@id="product-7"]/div/p/a
+lineItem1=/html/body/div[2]/div/form/table/tbody/tr[1]/td[1]
+lineItem2=/html/body/div[2]/div/form/table/tbody/tr[2]/td[1]
+lineItem3=/html/body/div[2]/div/form/table/tbody/tr[3]/td[1]
+subTotalLine1=/html/body/div[2]/div/form/table/tbody/tr[1]/td[4]
+subTotalLine2=/html/body/div[2]/div/form/table/tbody/tr[2]/td[4]
+subTotalLine3=/html/body/div[2]/div/form/table/tbody/tr[3]/td[4]

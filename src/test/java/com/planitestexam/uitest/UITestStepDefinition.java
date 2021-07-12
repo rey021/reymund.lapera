@@ -11,13 +11,17 @@ import com.planitestexam.bdd.uitest.execute;
 import com.planitestexam.bdd.uitest.getConfig;
 import com.planitestexam.bdd.uitest.SeleniumFlow;
 import io.cucumber.datatable.DataTable;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.CacheResponse;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,13 +56,13 @@ public class UITestStepDefinition {
     }
 
     @Given("User is navigating the contact page")
-    public void guest_is_browsing_the_contact_page_of_http_jupiter_cloud_planittesting_com() {
+    public void guest_is_browsing_the_contact_page_of_http_jupiter_cloud_planittesting_com() throws InterruptedException {
         SE.clickElement("xpath", webelements.get("home_contactpagebutton"));
         SE.waitUntilElementIsPresent("xpath", webelements.get("contactpage_submitbutton"));
     }
 
     @And("clicking the submit button")
-    public void submitting_the_contact_form() {
+    public void submitting_the_contact_form() throws InterruptedException {
         SE.clickElement("xpath", webelements.get("contactpage_submitbutton"));
         SE.waitUntilElementIsPresent("xpath", webelements.get("contactpage_submitbutton"));
     }
@@ -104,7 +108,7 @@ public class UITestStepDefinition {
     }
 
     @Given("User is navigating to shop page")
-    public void user_is_navigating_to_shop_page() {
+    public void user_is_navigating_to_shop_page() throws InterruptedException {
         SE.clickElement("xpath", webelements.get("navigate_shop_button"));
         SE.waitUntilElementIsPresent("xpath", webelements.get("shop_page"));
     }
@@ -112,21 +116,16 @@ public class UITestStepDefinition {
     @Then("verify item has been added to cart")
     public void viewingTheCartMenuVerifyHavingAnd() throws InterruptedException {
 
-
-/*
         SE.clickElement("xpath", webelements.get("navigate_cart_button"));
         SE.waitUntilElementIsPresent("xpath", webelements.get("navigate_cart_button"));
         boolean elementPresent = SE.isElementIsPresent("xpath", webelements.get("added_cart_funny_cow"));
         assertThat(elementPresent).isEqualTo(true);
         elementPresent = SE.isElementIsPresent("xpath", webelements.get("added_cart_fluffy_bunny"));
         assertThat(elementPresent).isEqualTo(true);
-
- */
     }
 
     @When("adding item and quantity on the ff.")
     public void addingAnd(Map<String, String> dataTable) {
-
 
 //========================
         for (Map.Entry<String, String> pair : dataTable.entrySet()) {
@@ -165,18 +164,38 @@ public class UITestStepDefinition {
                     System.out.println("PRICE === " + price);
                     Product myItem = Catalogue.getProduct(item);
                     cart.addLineItem(new LineItem(myItem, quantity));
+
+                    for (int x = quantity; x > 0 ; x --){
+                        SE.clickElement("xpath", webelements.get(item));
+                    }
+
                 }
         );
     }
 
     @Then("verify item has been added to cart with correct sub_total of each item and total cost")
-    public void verifyItemHasBeenAddedToCartWithTotalCost() {
+    public void verifyItemHasBeenAddedToCartWithTotalCost() throws InterruptedException {
 
-        DecimalFormat df = new DecimalFormat("#.##");
-        df.setRoundingMode(RoundingMode.CEILING);
+        BigDecimal bigDecimal = new BigDecimal(Double.toString(cart.getTotalCost()));
+        bigDecimal = bigDecimal.setScale(2, RoundingMode.HALF_UP);
 
-        System.out.printf("getLineItems === + "+  cart.getLineItems());
-        System.out.printf("total cost === + " + df.format(cart.getTotalCost()));
-        // End Total cost
+        SE.clickElement("xpath", webelements.get("navigate_cart_button"));
+        SE.waitUntilElementIsPresent("xpath", webelements.get("navigate_cart_button"));
+
+        int count = 1;
+        cart.getLineItems().stream().forEach(
+                items -> {
+
+                    Product item = items.getProduct();
+                    System.out.println( " Item.getName() === " + item.getName() + " totalSubPrice == " + items.getPrice());
+
+                    String subTotalDisplay= SE.getText("xpath",webelements.get("subTotalLine" + count));
+                    System.out.println("Assert!!!! ");
+                    System.out.println("End of Assert!!!!! ");
+                }
+        );
+
+        //total Cost correct
+        System.out.println("total cost with bigDecimal ===  + " + bigDecimal);
     }
 }//End of class

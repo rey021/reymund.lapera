@@ -27,24 +27,9 @@ Feature: Webpage Login Test
   @testcase4
   Scenario: Test Case#4 buy multiple item and validate the sub-totals and sum
     Given User is navigating to shop page
-    When adding item and quantity on the ff.
-      | Stuffed Frog   | 2 |
-      | Fluffy Bunny   | 5 |
-      | Valentine Bear | 3 |
-    And prices for each item are the following:
-      | Item           | Price | Quantity |
-      | Stuffed Frog   | 10.99 | 2        |
-      | Fluffy Bunny   | 9.99  | 5        |
-      | Valentine Bear | 14.99 | 3        |
-    Then verify item has been added to cart
-
-  @testcase5
-  Scenario: Test Case#5 buy multiple item and validate the sub-totals and sum
-    Given User is navigating to shop page
     And adding the following item, and quantity
       | Item           | Price | Quantity |
       | Stuffed Frog   | 10.99 | 2        |
       | Fluffy Bunny   | 9.99  | 5        |
       | Valentine Bear | 14.99 | 3        |
     Then verify item has been added to cart with correct sub_total of each item and total cost
-

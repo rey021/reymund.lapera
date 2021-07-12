@@ -2,6 +2,7 @@ package com.planitestexam.bdd.implementation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 public class ShoppingCart {
@@ -22,6 +23,7 @@ public class ShoppingCart {
                 .mapToDouble(LineItem::getPrice)
                 .sum();
     }
+
 
     @Override
     public String toString() {
