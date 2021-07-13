@@ -1,6 +1,6 @@
-Feature: Webpage Login Test
+Feature: Webpage adding cart and submit contact form
 
-  To test the login feature of the webpage and verify adding cart functionality
+  To test the contact form of the webpage and verify adding cart functionality
 
   Background:
     Given Given User is on the http://jupiter.cloud.planittesting.com
@@ -10,7 +10,7 @@ Feature: Webpage Login Test
     Given User is navigating the contact page
     When filling up the contact form on the following fields <FORENAME> , <SURNAME> , <EMAIL> , <TELEPHONE> , <MESSAGE>
     And clicking the submit button
-    Then he should get the success <RESPONSE MESSAGE>
+    Then he should get the the following <RESPONSE MESSAGE>
     Examples:
       | FORENAME     | SURNAME     | EMAIL          | TELEPHONE | MESSAGE        | RESPONSE MESSAGE                                                                       |
       |              |             |                |           |                | We welcome your feedback - but we won't get it unless you complete the form correctly. |
