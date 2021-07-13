@@ -10,7 +10,7 @@ Feature: Webpage adding cart and submit contact form
     Given User is navigating the contact page
     When filling up the contact form on the following fields <FORENAME> , <SURNAME> , <EMAIL> , <TELEPHONE> , <MESSAGE>
     And clicking the submit button
-    Then he should get the success <RESPONSE MESSAGE>
+    Then he should get the the following <RESPONSE MESSAGE>
     Examples:
       | FORENAME     | SURNAME     | EMAIL          | TELEPHONE | MESSAGE        | RESPONSE MESSAGE                                                                       |
       |              |             |                |           |                | We welcome your feedback - but we won't get it unless you complete the form correctly. |

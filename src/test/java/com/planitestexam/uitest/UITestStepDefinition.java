@@ -87,7 +87,7 @@ public class UITestStepDefinition {
         SE.setText("xpath", webelements.get("message"), message);
     }
 
-    @Then("^s?he should get the success (.*)$")
+    @Then("^s?he should get the the following (.*)$")
     public void checkResponseMessage(String text) throws InterruptedException {
         String message = "";
         if (contactForm.getForename().isEmpty() || contactForm.getSurname().isEmpty() || contactForm.getEmail().isEmpty() ||
