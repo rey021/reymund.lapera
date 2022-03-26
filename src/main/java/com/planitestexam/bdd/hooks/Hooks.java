@@ -4,7 +4,8 @@ package com.planitestexam.bdd.hooks;
 import com.planitestexam.bdd.uitest.GetConfig;
 import com.planitestexam.bdd.uitest.SeleniumFlow;
 import com.planitestexam.bdd.uitest.execute;
-import io.cucumber.java.Before;
+import cucumber.api.java.Before;
+
 
 import java.util.HashMap;
 import java.util.Map;

@@ -7,9 +7,6 @@ import com.planitestexam.bdd.uitest.BrowserActions;
 import com.planitestexam.bdd.uitest.BrowserUtils;
 import com.planitestexam.bdd.uitest.execute;
 import com.planitestexam.bdd.uitest.SeleniumFlow;
-import cucumber.api.java.Before;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.When;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
@@ -45,6 +42,7 @@ public class UITestStepDefinition {
 
     @Before
     public void setScenario(Scenario scenario) { this.scenario = scenario;}
+
     @Given("Given User is on the (.*)")
     public void givenUserIsOnTheHttpJupiterCloudPlanittestingCom(String url) {
         SE.goToSite(url);

@@ -3,7 +3,7 @@ package com.planitestexam.bdd.uitest;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+//import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 
 import static org.apache.commons.lang3.ArrayUtils.isNotEmpty;
@@ -17,15 +17,15 @@ public class BrowserUtils {
 
     public static byte[] captureScreenshotOfBrowser(){
         failIfCaptureScreenshotIsDisable();
-        if (isWebDriverHtmlUnit()) {
-            return EMPTY_SCREENSHOT_ARRAY;
-        }
+//        if (isWebDriverHtmlUnit()) {
+//            return EMPTY_SCREENSHOT_ARRAY;
+//        }
         return ((TakesScreenshot) se.getWebDriver()).getScreenshotAs(OutputType.BYTES);
     }
 
-    private static boolean isWebDriverHtmlUnit() {
-        return SeleniumFlow.getInstance().getWebDriver() instanceof HtmlUnitDriver;
-    }
+//    private static boolean isWebDriverHtmlUnit() {
+//       // return SeleniumFlow.getInstance().getWebDriver() instanceof HtmlUnitDriver;
+//    }
     public static void captureScreenshotToScenario(Scenario scenarioToAttach, byte[] imagesBytesToAttach){
         if (isNotEmpty(imagesBytesToAttach)){
             scenarioToAttach.attach(imagesBytesToAttach, "image/png", "screenshot");
