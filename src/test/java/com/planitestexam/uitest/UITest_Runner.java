@@ -5,7 +5,7 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
         features = "src/test/resources/com/planitestexam/uitest",
-        tags = "@testcase1&2",
+        tags = "@all",
         glue = {"com.planitestexam.uitest","com.planitestexam.bdd.hooks"},
         plugin = { "pretty", "html:target/cucumber-reports/cucumber.html",
                 "json:target/cucumber-reports/cucumber.json",

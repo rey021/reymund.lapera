@@ -3,10 +3,7 @@ package com.planitestexam.uitest;
 import com.planitestexam.bdd.implementation.*;
 import com.planitestexam.bdd.implementation.ContactForm;
 import com.planitestexam.bdd.pages.planittestContactForm;
-import com.planitestexam.bdd.uitest.BrowserActions;
-import com.planitestexam.bdd.uitest.BrowserUtils;
-import com.planitestexam.bdd.uitest.execute;
-import com.planitestexam.bdd.uitest.SeleniumFlow;
+import com.planitestexam.bdd.uitest.*;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -16,9 +13,11 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
 
 import java.util.HashMap;
 import java.util.List;
@@ -26,14 +25,14 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.planitestexam.bdd.uitest.DriverFactory.getChromeDriver;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class UITestStepDefinition {
-
+public class UITestStepDefinition extends TestBase {
+    private WebDriver driver = getChromeDriver();
     private planittestContactForm contactForm = new planittestContactForm();
     private Scenario scenario;
 
-    SeleniumFlow SE = SeleniumFlow.getInstance();
     Map<String, String> webelements = new HashMap<String, String>();
 
     Map<String, String> items = new HashMap<String, String>();
@@ -41,18 +40,23 @@ public class UITestStepDefinition {
     ShoppingCart cart = new ShoppingCart();
 
 
+
     @AfterTest
     public void tearDown(){
-        SE.closeDriver();
+        driver.close();
     }
 
     @Before
     public void setScenario(Scenario scenario) { this.scenario = scenario;}
 
+    @Before
+    public void getDriver(){
+        driver = getChromeDriver();
+    }
+
     @Given("^Given User is on the (.*)$")
     public void givenUserIsOnTheHttpJupiterCloudPlanittestingCom(String url) {
-        System.out.println("ASDASDASDASD");
-        SE.goToSite(url);
+        driver.get(url);
     }
 
     @Given("User is navigating the contact page")

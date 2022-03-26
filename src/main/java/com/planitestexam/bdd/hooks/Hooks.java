@@ -1,30 +1,19 @@
 package com.planitestexam.bdd.hooks;
 
 
-import com.planitestexam.bdd.uitest.GetConfig;
-import com.planitestexam.bdd.uitest.SeleniumFlow;
-import com.planitestexam.bdd.uitest.execute;
+import com.planitestexam.bdd.uitest.TestBase;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
 
 
-import java.util.HashMap;
-import java.util.Map;
+import static com.planitestexam.bdd.uitest.DriverFactory.getChromeDriver;
 
-public class Hooks {
-    SeleniumFlow SE = SeleniumFlow.getInstance();
+public class Hooks extends TestBase{
+    private WebDriver driver = getChromeDriver();
 
-    public Hooks() throws Exception {
+    public Hooks() {
     }
 
-    @Before
-    public void setUpApplication() throws Exception {
-        System.out.println("Before Method");
-    }
-
-    @After
-    public void closeDriver() throws Exception {
-        System.out.println("After Method");
-    }
 }

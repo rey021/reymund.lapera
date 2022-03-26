@@ -13,9 +13,12 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
+import static com.planitestexam.bdd.uitest.DriverFactory.getChromeDriver;
+
 public class BrowserActions {
-    static SeleniumFlow SE = SeleniumFlow.getInstance();
-    private static GetConfig config = GetConfig.getInstance();
+
+    private static WebDriver driver = getChromeDriver();
+
     private static BrowserActions instance = null;
 
     private static final Logger logger = LogManager.getLogger(BrowserActions.class);
@@ -43,31 +46,31 @@ public class BrowserActions {
     }
     public static <T> void clickElement(By locator) {
         logger.info("Clicking the element... Locator: " + locator + " === " + "Element: ");
-        WebElement element =  SE.getWebDriver().findElement(locator);
+        WebElement element =  driver.findElement(locator);
         element.click();
        // waitUntilLoaded();
         logger.info("Successfully clicked the element");
     }
 
     public static WebElement findElement(By locator) {
-        WebElement element = SE.getWebDriver().findElement(locator);
+        WebElement element = driver.findElement(locator);
         return element;
     }
 
-    public static void waitUntilLoaded() {
+    public static void waitUntilLoaded( int timeoOutiInSecond) {
 
-        new WebDriverWait(SE.getWebDriver(), Long.parseLong(config.getWaitingTime())).until(
+        new WebDriverWait(driver, 10).until(
                 webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
         logger.info("Page load has been complete");
     }
 
     public static void waitTime(int seconds) {
-        SE.getWebDriver().manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
     }
 
     public static <T> WebElement getElement(T locator) {
         String classLocator = getLocatorClass(locator);
-        WebElement ele = SE.getWebDriver().findElement(By.xpath(locator.toString()));
+        WebElement ele = driver.findElement(By.xpath(locator.toString()));
         System.out.println("pumasok??");
 
         return ele;
@@ -78,7 +81,7 @@ public class BrowserActions {
     }
 
     public static FluentWait<WebDriver> createFluentWait(List<Class<? extends Throwable>> classExceptionToIgnore) {
-        return new FluentWait<>(SE.getWebDriver()).withTimeout(Duration.ofSeconds(5))
+        return new FluentWait<>(driver).withTimeout(Duration.ofSeconds(5))
                 .pollingEvery(Duration.ofMillis(500))
                 .ignoreAll(classExceptionToIgnore);
     }
@@ -106,7 +109,7 @@ public class BrowserActions {
     }
 
     public static void clickOnceItsClickable(By locator) {
-        WebDriverWait wait = new WebDriverWait(SE.getWebDriver(), 10);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
         element.click();
     }
@@ -120,7 +123,7 @@ public class BrowserActions {
 
     public static void waitUntilElementIsPresent(By locator ) throws InterruptedException {
         logger.info("Locator: " + locator.toString() + " === " + "Element: ");
-        WebDriverWait w = new WebDriverWait(SE.getWebDriver(),Long.parseLong(config.getWaitingTime()));
+        WebDriverWait w = new WebDriverWait(driver,10);
         // presenceOfElementLocated condition
         w.until(ExpectedConditions.presenceOfElementLocated (locator));
         //logger.info("Element present having text:" + findBy(locator, id).toString());
@@ -137,7 +140,7 @@ public class BrowserActions {
 
     public boolean isElementIsPresent(String locator, String id) throws InterruptedException {
         Thread.sleep(7000);
-        return SE.getWebDriver().findElement(findBy(locator, id)).isDisplayed();
+        return driver.findElement(findBy(locator, id)).isDisplayed();
     }
 
     	public static void setText(By locator, String value){
@@ -149,6 +152,6 @@ public class BrowserActions {
 
     public static boolean isElementIsPresent(By locator) throws InterruptedException {
         Thread.sleep(7000);
-        return SE.getWebDriver().findElement(locator).isDisplayed();
+        return driver.findElement(locator).isDisplayed();
     }
 }
