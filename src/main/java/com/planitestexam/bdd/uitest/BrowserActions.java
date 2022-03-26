@@ -17,13 +17,13 @@ import static com.planitestexam.bdd.uitest.DriverFactory.getChromeDriver;
 
 public class BrowserActions {
 
-    private static WebDriver driver = getChromeDriver();
+    private static final WebDriver driver = getChromeDriver();
 
     private static BrowserActions instance = null;
 
     private static final Logger logger = LogManager.getLogger(BrowserActions.class);
 
-    private BrowserActions() throws Exception {
+    private BrowserActions(){
         if(instance != null) {
             throw new RuntimeException("Use getInstance() method to create");
         }
@@ -132,7 +132,7 @@ public class BrowserActions {
 
     private static By findBy(String locator, String id) {
         By by = null;
-        if (locator.toLowerCase() == "xpath"){
+        if (locator.equalsIgnoreCase("xpath")){
             by = By.xpath(id);
         }
         return by;
@@ -153,5 +153,11 @@ public class BrowserActions {
     public static boolean isElementIsPresent(By locator) throws InterruptedException {
         Thread.sleep(7000);
         return driver.findElement(locator).isDisplayed();
+    }
+
+    public static String getText(By locator){
+        String text = findElement(locator).getText();
+        logger.info("GETTEXT Value = " + text);
+        return text;
     }
 }
