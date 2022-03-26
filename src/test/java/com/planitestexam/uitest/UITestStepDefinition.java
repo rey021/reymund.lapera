@@ -9,18 +9,10 @@ import com.planitestexam.bdd.uitest.execute;
 import com.planitestexam.bdd.uitest.SeleniumFlow;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
-
-import static org.junit.Assert.*;
-
-
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,8 +35,9 @@ public class UITestStepDefinition {
     @Before
     public void setScenario(Scenario scenario) { this.scenario = scenario;}
 
-    @Given("Given User is on the (.*)")
+    @Given("^Given User is on the (.*)$")
     public void givenUserIsOnTheHttpJupiterCloudPlanittestingCom(String url) {
+        System.out.println("ASDASDASDASD");
         SE.goToSite(url);
     }
 

@@ -1,19 +1,18 @@
 package com.planitestexam.uitest;
 
 import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
-import org.junit.runner.RunWith;
+import io.cucumber.testng.AbstractTestNGCucumberTests;
 
-
-@RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "classpath:features/UITest",
+        features = "classpath:features/uitest",
         glue = {"com.planitestexam.uitest","com.planitestexam.bdd.hooks"},
         plugin = { "pretty", "html:target/html-reports",
                 "json:target/cucumber.json",
                 "rerun:target/rerun.txt"
-        }
-        //tags = { "@testcase4" }
+        },
+        tags = {"@testcase1&2"}
+
 )
-public class UITest_Runner {
+public class UITest_Runner extends AbstractTestNGCucumberTests {
+
 }
