@@ -48,16 +48,8 @@ public class BrowserActions {
         logger.info("Successfully clicked the element");
     }
 
-    private static WebElement findElement(String locator, String id) {
-        WebElement element = null;
-        if (locator.toLowerCase() == "xpath"){
-            element = SE.getWebDriver().findElement(By.xpath(id));
-        }
-        return element;
-    }
-    private static WebElement findElement(By locator) {
-        WebElement element = null;
-            element = SE.getWebDriver().findElement(locator);
+    public static WebElement findElement(By locator) {
+        WebElement element = SE.getWebDriver().findElement(locator);
         return element;
     }
 
@@ -116,12 +108,12 @@ public class BrowserActions {
         FOCUS_WARNING
     }
 
-    public static void waitUntilElementIsPresent(String locator, String id ) throws InterruptedException {
-        logger.info("Locator: " + locator + " === " + "Element: " + id );
+    public static void waitUntilElementIsPresent(By locator ) throws InterruptedException {
+        logger.info("Locator: " + locator.toString() + " === " + "Element: ");
         WebDriverWait w = new WebDriverWait(SE.getWebDriver(),Long.parseLong(config.getWaitingTime()));
         // presenceOfElementLocated condition
-        w.until(ExpectedConditions.presenceOfElementLocated (findBy(locator, id)));
-        logger.info("Element present having text:" + findBy(locator, id).toString());
+        w.until(ExpectedConditions.presenceOfElementLocated (locator));
+        //logger.info("Element present having text:" + findBy(locator, id).toString());
         Thread.sleep(3000);
     }
 

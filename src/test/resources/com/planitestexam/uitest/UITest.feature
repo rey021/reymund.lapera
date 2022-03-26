@@ -14,7 +14,7 @@ Feature: Webpage adding cart and submit contact form
     Examples:
       | FORENAME     | SURNAME     | EMAIL          | TELEPHONE | MESSAGE        | RESPONSE MESSAGE                                                                       |
       |              |             |                |           |                | We welcome your feedback - but we won't get it unless you complete the form correctly. |
-#      | forenametest | surnametest | test@gmail.com | 3241234   | This is a test | Thanks forenametest, we appreciate your feedback.                                      |
+      | forenametest | surnametest | test@gmail.com | 3241234   | This is a test | Thanks forenametest, we appreciate your feedback.                                      |
 
 #  @testcase3
 #  Scenario: Test Case#3 Able to add item to cart

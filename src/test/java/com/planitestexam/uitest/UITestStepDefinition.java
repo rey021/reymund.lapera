@@ -10,7 +10,9 @@ import com.planitestexam.bdd.uitest.SeleniumFlow;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import java.util.HashMap;
@@ -44,16 +46,17 @@ public class UITestStepDefinition {
     @Given("User is navigating the contact page")
     public void guest_is_browsing_the_contact_page_of_http_jupiter_cloud_planittesting_com() throws InterruptedException {
         BrowserActions.clickElement(By.xpath("//*[@id=\"nav-contact\"]/a"));
-//        SE.clickElement("xpath", webelements.get("home_contactpagebutton"));
-        BrowserActions.waitUntilElementIsPresent("xpath", "/html/body/div[2]/div/form/div/a");
+        BrowserActions.waitUntilElementIsPresent(By.xpath("/html/body/div[2]/div/form/div/a"));
         BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
     }
 
-//    @And("clicking the submit button")
-//    public void submitting_the_contact_form() throws InterruptedException {
-//        SE.clickElement("xpath", webelements.get("contactpage_submitbutton"));
+    @And("clicking the submit button")
+    public void submitting_the_contact_form() throws InterruptedException {
+        BrowserActions.clickElement(By.xpath("/html/body/div[2]/div/form/div/a"));
+        BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
+        BrowserActions.waitUntilElementIsPresent(By.xpath("/html/body/div[2]/div/form/div/a"));
 //        SE.waitUntilElementIsPresent("xpath", webelements.get("contactpage_submitbutton"));
-//    }
+    }
 //
 //    @Then("^s?he should get the error message: \"(.*)\"$")
 //    public void he_should_get_the_ERROR_message(String text) {
@@ -67,19 +70,11 @@ public class UITestStepDefinition {
         BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
     }
 //
-//    @Then("^s?he should get the the following (.*)$")
-//    public void checkResponseMessage(String text) throws InterruptedException {
-//        String message = "";
-//        if (contactForm.getForename().isEmpty() || contactForm.getSurname().isEmpty() || contactForm.getEmail().isEmpty() ||
-//                contactForm.getTelephone().isEmpty()) {
-//            SE.waitUntilElementIsPresent("xpath", webelements.get("contactPage_errorMessage"));
-//            message = SE.getText("xpath", webelements.get("contactPage_errorMessage"));
-//        } else {
-//            SE.waitUntilElementIsPresent("xpath", webelements.get("contact_success_message"));
-//            message = SE.getText("xpath", webelements.get("contact_success_message"));
-//        }
-//        assertThat(message).isEqualTo(text);
-//    }
+    @Then("^s?he should get the the following (.*)$")
+    public void checkResponseMessage(String expectedResult) throws InterruptedException {
+        contactForm.validate(expectedResult);
+        BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
+    }
 //
 //    @When("leaving fields as blank")
 //    public void leavingFieldsAsBlank() {

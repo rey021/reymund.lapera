@@ -6,8 +6,8 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 @CucumberOptions(
         features = "classpath:features/uitest",
         glue = {"com.planitestexam.uitest","com.planitestexam.bdd.hooks"},
-        plugin = { "pretty", "html:target/html-reports",
-                "json:target/cucumber.json",
+        plugin = { "pretty", "html:target/cucumber-reports/cucumber.html",
+                "json:target/cucumber-reports/cucumber.json",
                 "rerun:target/rerun.txt"
         },
         tags = {"@testcase1&2"}

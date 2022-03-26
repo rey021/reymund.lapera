@@ -5,6 +5,7 @@ import com.planitestexam.bdd.uitest.GetConfig;
 import com.planitestexam.bdd.uitest.SeleniumFlow;
 import com.planitestexam.bdd.uitest.execute;
 import cucumber.api.java.Before;
+import io.cucumber.java.After;
 
 
 import java.util.HashMap;
@@ -21,8 +22,8 @@ public class Hooks {
 
     }
 
-//    @After
-//    public void closeDriver() throws Exception {
-//        SE.closeDriver();
-//    }
+    @After
+    public void closeDriver() throws Exception {
+        SE.closeDriver();
+    }
 }

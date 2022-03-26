@@ -151,12 +151,7 @@ public class SeleniumFlow {
 
 
 
-//	public String getText(String locator, String id){
-//		logger.info("ACTION: GETTEXT, LOCATOR: " + locator + " ID: " + id);
-//		String text = findElement(locator, id).getText();
-//		logger.info("GETTEXT Value = " + text);
-//		return text;
-//	}
+
 //
 
 
