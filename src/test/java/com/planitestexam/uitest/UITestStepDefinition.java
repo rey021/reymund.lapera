@@ -1,19 +1,24 @@
 package com.planitestexam.uitest;
 
 import com.planitestexam.bdd.implementation.*;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import com.planitestexam.bdd.uitest.execute;
-import com.planitestexam.bdd.uitest.getConfig;
-import com.planitestexam.bdd.uitest.SeleniumFlow;
-import static org.junit.Assert.*;
+import com.planitestexam.bdd.implementation.ContactForm;
+import com.planitestexam.bdd.pages.PagePlanitCart;
+import com.planitestexam.bdd.pages.planittestContactForm;
+import com.planitestexam.bdd.uitest.*;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 
-
-import static org.assertj.core.api.Assertions.assertThat;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -24,137 +29,146 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class UITestStepDefinition {
+import static com.planitestexam.bdd.uitest.DriverFactory.getChromeDriver;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
-    execute exe = new execute();
-    getConfig config;
-    SeleniumFlow SE;
-    Map<String, String> webelements = new HashMap<String, String>();
-    ContactForm contactForm = new ContactForm();
-    Map<String, String> items = new HashMap<String, String>();
+public class UITestStepDefinition extends TestBase {
+    private WebDriver driver = getChromeDriver();
+    private planittestContactForm contactForm = new planittestContactForm();
+    private Scenario scenario;
+
+    Map<String, String> webelements = new HashMap<>();
+
+    Map<String, String> items = new HashMap<>();
     Catalogue catalogue = new Catalogue();
     ShoppingCart cart = new ShoppingCart();
 
+
+
+    @AfterTest
+    public void tearDown(){
+        driver.close();
+    }
+
     @Before
-    public void initializeSelenium() throws Exception {
-        exe.run();
-        config = exe.getConfig();
-        SE = exe.getSeleniumFlow();
-        webelements = config.readFileElements();
+    public void setScenario(Scenario scenario) { this.scenario = scenario;}
+
+    @Before
+    public void getDriver(){
+        driver = getChromeDriver();
     }
 
-    @After
-    public void closeDriver() throws Exception {
-         SE.closeDriver();
-    }
-
-    @Given("Given User is on the (.*)")
+    @Given("^Given User is on the (.*)$")
     public void givenUserIsOnTheHttpJupiterCloudPlanittestingCom(String url) {
-        SE.goToSite(url);
+        driver.get(url);
     }
 
     @Given("User is navigating the contact page")
     public void guest_is_browsing_the_contact_page_of_http_jupiter_cloud_planittesting_com() throws InterruptedException {
-        SE.clickElement("xpath", webelements.get("home_contactpagebutton"));
-        SE.waitUntilElementIsPresent("xpath", webelements.get("contactpage_submitbutton"));
+        BrowserActions.clickElement(By.xpath("//*[@id=\"nav-contact\"]/a"));
+        BrowserActions.waitUntilElementIsPresent(By.xpath("/html/body/div[2]/div/form/div/a"));
+        BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
     }
 
     @And("clicking the submit button")
-    public void submitting_the_contact_form() throws InterruptedException {
-        SE.clickElement("xpath", webelements.get("contactpage_submitbutton"));
-        SE.waitUntilElementIsPresent("xpath", webelements.get("contactpage_submitbutton"));
+    public void submitting_the_contact_form() {
+        BrowserActions.clickOnceItsClickable(By.xpath("/html/body/div[2]/div/form/div/a"));
+        BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
+        BrowserActions.waitTime(5);
     }
-
-    @Then("^s?he should get the error message: \"(.*)\"$")
-    public void he_should_get_the_ERROR_message(String text) {
-        String message = SE.getText("xpath", webelements.get("contactPage_errorMessage"));
-        assertThat(message).isEqualTo(text);
-    }
-
+//
+//    @Then("^s?he should get the error message: \"(.*)\"$")
+//    public void he_should_get_the_ERROR_message(String text) {
+//        String message = SE.getText("xpath", webelements.get("contactPage_errorMessage"));
+//        assertThat(message).isEqualTo(text);
+//    }
+//
     @When("^filling up the contact form on the following fields (.*) , (.*) , (.*) , (.*) , (.*)$")
     public void fillingUpTheContactForm(String forename, String surname, String email, String telephone, String message) {
-
-        contactForm.setForename(forename);
-        contactForm.setSurname(surname);
-        contactForm.setTelephone(telephone);
-        contactForm.setEmail(email);
-        contactForm.setMessage(message);
-
-        SE.setText("xpath", webelements.get("forename"), forename);
-        SE.setText("xpath", webelements.get("surname"), surname);
-        SE.setText("xpath", webelements.get("email"), telephone);
-        SE.setText("xpath", webelements.get("telephone"), email);
-        SE.setText("xpath", webelements.get("message"), message);
+        contactForm.fillUpForm(forename,surname,email,telephone,message);
+        BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
+        BrowserActions.waitTime(5);
+        BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
     }
-
+//
     @Then("^s?he should get the the following (.*)$")
-    public void checkResponseMessage(String text) throws InterruptedException {
-        String message = "";
-        if (contactForm.getForename().isEmpty() || contactForm.getSurname().isEmpty() || contactForm.getEmail().isEmpty() ||
-                contactForm.getTelephone().isEmpty()) {
-            SE.waitUntilElementIsPresent("xpath", webelements.get("contactPage_errorMessage"));
-            message = SE.getText("xpath", webelements.get("contactPage_errorMessage"));
-        } else {
-            SE.waitUntilElementIsPresent("xpath", webelements.get("contact_success_message"));
-            message = SE.getText("xpath", webelements.get("contact_success_message"));
-        }
-        assertThat(message).isEqualTo(text);
+    public void checkResponseMessage(String expectedResult) throws InterruptedException {
+        contactForm.validate(expectedResult);
+        BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
     }
-
-    @When("leaving fields as blank")
-    public void leavingFieldsAsBlank() {
-    }
-
+//
+//    @When("leaving fields as blank")
+//    public void leavingFieldsAsBlank() {
+//    }
+//
     @Given("User is navigating to shop page")
     public void user_is_navigating_to_shop_page() throws InterruptedException {
-        SE.clickElement("xpath", webelements.get("navigate_shop_button"));
-        SE.waitUntilElementIsPresent("xpath", webelements.get("shop_page"));
+        BrowserActions.clickElement(By.xpath("//*[@id=\"nav-shop\"]/a"));
+        BrowserActions.waitUntilElementIsPresent(By.xpath("/html/body/div[2]/div[@class=\"products ng-scope\"]"));
+        BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
     }
-
+//
     @Then("verify item has been added to cart")
     public void viewingTheCartMenuVerifyHavingAnd() throws InterruptedException {
 
-        SE.clickElement("xpath", webelements.get("navigate_cart_button"));
-        SE.waitUntilElementIsPresent("xpath", webelements.get("navigate_cart_button"));
-        boolean elementPresent = SE.isElementIsPresent("xpath", webelements.get("added_cart_funny_cow"));
+        BrowserActions.clickElement(By.xpath("//*[@id=\"nav-cart\"]/a"));
+        BrowserActions.waitUntilElementIsPresent(By.xpath("//*[@id=\"nav-cart\"]/a"));
+
+        BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
+
+        boolean elementPresent = BrowserActions.isElementIsPresent(By.xpath("//td[contains(text(),\"Funny Cow\")]"));
         assertThat(elementPresent).isEqualTo(true);
-        elementPresent = SE.isElementIsPresent("xpath", webelements.get("added_cart_fluffy_bunny"));
+        elementPresent = BrowserActions.isElementIsPresent(By.xpath("//td[contains(text(),\"Fluffy Bunny\")]"));
         assertThat(elementPresent).isEqualTo(true);
     }
-
+//
     @When("adding item and quantity on the ff.")
     public void addingAnd(Map<String, String> dataTable) {
 
+        BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
         for (Map.Entry<String, String> pair : dataTable.entrySet()) {
 
             for (int x = Integer.parseInt(pair.getValue()); x > 0; x--) {
 
                 switch (pair.getKey()) {
                     case "Funny Cow":
-                        SE.clickElement("xpath", webelements.get("buy_button_funny_cow"));
+                        BrowserActions.clickElement(By.xpath("//*[@id=\"product-6\"]/div/p/a[contains(text(),\"Buy\")]"));
+                        BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
                         break;
                     case "Fluffy Bunny":
-                        SE.clickElement("xpath", webelements.get("buy_button_fluffy_cow"));
+                        BrowserActions.clickElement(By.xpath("//*[@id=\"product-4\"]/div/p/a"));
+                        BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
                         break;
                     case "Stuffed Frog":
-                        SE.clickElement("xpath", webelements.get("buy_button_stuffed_frog"));
+                        BrowserActions.clickElement(By.xpath("//*[@id=\"product-2\"]/div/p/a"));
+                        BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
                         break;
                     case "Valentine Bear":
-                        SE.clickElement("xpath", webelements.get("buy_button_valentine_bear"));
+                        BrowserActions.clickElement(By.xpath("//*[@id=\"product-7\"]/div/p/a"));
+                        BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
                         break;
                 }
             }
         }
     }
-
+//
     @And("adding the following item, and quantity")
     public void pricesForEachItemAreTheFollowing(List<Map<String, String>> dataTable) {
+
+        BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
+
+        Map<String, String> itemsMapXpath = new HashMap<>();
+        itemsMapXpath.put("Stuffed Frog","//*[@id=\"product-2\"]/div/p/a" );
+        itemsMapXpath.put("Fluffy Bunny","//*[@id=\"product-4\"]/div/p/a" );
+        itemsMapXpath.put("Valentine Bear","//*[@id=\"product-7\"]/div/p/a" );
 
         dataTable.stream().forEach(
                 map -> {
                     String item = map.get("Item");
-                    Float price = Float.parseFloat(map.get("Price"));
-                    Integer quantity = Integer.parseInt(map.get("Quantity"));
+                    float price = Float.parseFloat(map.get("Price"));
+                    int quantity = Integer.parseInt(map.get("Quantity"));
 
                     catalogue.setProduct(item,new PhysicalProduct(item, price));
 
@@ -163,82 +177,57 @@ public class UITestStepDefinition {
                     cart.addLineItem(new LineItem(myItem, quantity));
 
                     for (int x = quantity; x > 0 ; x --){
-                        SE.clickElement("xpath", webelements.get(item));
+                        BrowserActions.clickElement(By.xpath(itemsMapXpath.get(item)));
+                        BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
                     }
 
                 }
         );
     }
-
+//
     @Then("verify item has been added to cart with correct sub_total of each item and total cost")
     public void verifyItemHasBeenAddedToCartWithTotalCost() throws InterruptedException {
 
+        BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
+
+        PagePlanitCart pagePlanitCart = new PagePlanitCart();
+
         DecimalFormat df = new DecimalFormat("###.#");
-        BigDecimal totalCostToBigDecimal = new BigDecimal(Double.toString(cart.getTotalCost()));
-        totalCostToBigDecimal = totalCostToBigDecimal.setScale(2, RoundingMode.HALF_UP);
 
-        SE.clickElement("xpath", webelements.get("navigate_cart_button"));
-        SE.waitUntilElementIsPresent("xpath", webelements.get("navigate_cart_button"));
+        Map<String, String> subTotalMapToXpath = new HashMap<>();
+        subTotalMapToXpath.put("subTotalLine1","/html/body/div[2]/div/form/table/tbody/tr[1]/td[4]");
+        subTotalMapToXpath.put("subTotalLine2","/html/body/div[2]/div/form/table/tbody/tr[2]/td[4]");
+        subTotalMapToXpath.put("subTotalLine3","/html/body/div[2]/div/form/table/tbody/tr[3]/td[4]");
 
-        int count = 1;
-        cart.getLineItems().stream().forEach(
-                items -> {
 
-                    Product item = items.getProduct();
-                    int counter = 1 ;
-                    for (int x = counter; x < cart.getLineItems().size()+1; x++){
-                        String displayItem = SE.getText("xpath", "/html/body/div[2]/div/form/table/tbody/tr["
-                                + counter + "]/td[1]");
-                        if (displayItem.equals(item.getName())){
+        Utilities utilities = new Utilities();
+        BigDecimal totalCostToBigDecimal = utilities.getTotalCostToBigDecimal(cart);
 
-                            String subTotalDisplay= SE.getText("xpath",webelements.get("subTotalLine" + count));
+        BrowserActions.clickElement(By.xpath("//*[@id=\"nav-cart\"]/a"));
+        BrowserActions.waitUntilElementIsPresent(By.xpath("//*[@id=\"nav-cart\"]/a"));
 
-                            BigDecimal subTotalToBigDecimal = new BigDecimal(Double.toString(items.getPrice()));
-                            subTotalToBigDecimal = subTotalToBigDecimal.setScale(2, RoundingMode.HALF_UP);
+        BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
 
-                            assertEquals(subTotalDisplay,"$"+subTotalToBigDecimal); // Validate subtotal of each lineItem
+        boolean result = pagePlanitCart.calculateCart(cart,subTotalMapToXpath);
+        System.out.println("Validate subtotal of each lineItem ===  )");
 
-                            break;
-                        }
-                    }
-                }
-        );
+        assertTrue(result);
 
         System.out.println("Computed Total Cost ===  + " + totalCostToBigDecimal);
-        System.out.println("Display on Webpage totalCost == " + SE.getText("xpath",webelements.get("totalPrice")));
+        System.out.println("Display on Webpage totalCost == " + BrowserActions.getText(By.xpath("/html/body/div[2]/div/form/table/tfoot/tr[1]/td")));
 
-        String totalCost = regex(SE.getText("xpath",webelements.get("totalPrice")),"(?<=\\s).*");
+        String totalCost = utilities.regex(BrowserActions.getText(By.xpath("/html/body/div[2]/div/form/table/tfoot/tr[1]/td")),"(?<=\\s).*");
 
-        if (checkIfOneDecimal(totalCost)){
+        BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
+
+        if (utilities.checkIfOneDecimal(totalCost)){
             assertEquals(totalCost,df.format(totalCostToBigDecimal));
         }
         else
         {
             assertEquals(totalCost,totalCostToBigDecimal.toString());
         }
+
     }
-
-    private boolean checkIfOneDecimal(String totalCost) {
-
-        boolean status = false;
-        int indexOfDecimal = totalCost.indexOf(".")+1;
-
-        if(((totalCost.length() - indexOfDecimal)) == 1) {
-            status = true;
-        }
-        return status;
-    }
-
-    private String regex(String value, String regex)
-    {
-        Pattern p = Pattern.compile(regex);//. represents single character
-        Matcher m = p.matcher(value);
-        String result = "";
-
-        if (m.find()){
-            return m.group(0);
-        }
-        return null;
-    } // End of method regex
 
 }//End of class
