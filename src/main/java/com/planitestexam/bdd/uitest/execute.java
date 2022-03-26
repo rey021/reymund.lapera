@@ -3,6 +3,8 @@ package com.planitestexam.bdd.uitest;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.swing.text.html.parser.Entity;
 import java.io.File;
@@ -12,32 +14,48 @@ import java.util.List;
 import java.util.Map;
 
 public class execute {
-    SeleniumFlow SE;
-    getConfig config;
-    LogManager  log;
+    SeleniumFlow SE = SeleniumFlow.getInstance();
+    GetConfig config = GetConfig.getInstance();
+    private static final Logger logger = LogManager.getLogger(execute.class);
 
-    {
-        config = new getConfig();
-        log = new LogManager();
-        log = config.logManager();
+    private static volatile execute instance = null;
 
+    private execute() throws Exception {
+        if(instance != null) {
+            throw new RuntimeException("Use getInstance() method to create");
+        }
+    }
+// Singleton design patter
+    public static execute getInstance() {
+        if(instance == null) {
+            synchronized(execute.class) {
+                if(instance == null) {
+                    try {
+                        instance = new execute();
+                        instance.initialize();
+                    } catch (Exception ex){
+                        ex.printStackTrace();
+                    }
+
+                }
+            }
+        }
+        return instance;
+    }
+
+    private void initialize(){
         try {
             config.initializeConfig();
-            log.info("initialize webElement");
-            //System.exit(1);
-            //config.initializeWebElements();
+            logger.info("initialize webElement");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public execute() {
-    }
 
     void initializeDriver(){
-        SE = new SeleniumFlow();
-        SE.initialized(config);
-        log.initialize(config.getLogType(), config.getConfigDIR());
+        SE.initialized();
     }
 
     public void run() {
@@ -47,7 +65,7 @@ public class execute {
 
         }//End of method run
 
-    public getConfig getConfig(){
+    public GetConfig getConfig(){
         return config;
     }
 
