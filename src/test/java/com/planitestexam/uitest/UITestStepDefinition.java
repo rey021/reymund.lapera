@@ -70,6 +70,9 @@ public class UITestStepDefinition {
     public void fillingUpTheContactForm(String forename, String surname, String email, String telephone, String message) {
         contactForm.fillUpForm(forename,surname,email,telephone,message);
         BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
+        BrowserActions.clickElement(By.xpath("/html/body/div[2]/div/form/div/a"));
+        BrowserActions.waitUntilLoaded();
+        BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
     }
 //
     @Then("^s?he should get the the following (.*)$")

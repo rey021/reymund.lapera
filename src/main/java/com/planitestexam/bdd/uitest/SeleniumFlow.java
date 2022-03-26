@@ -123,7 +123,8 @@ public class SeleniumFlow {
 	public void closeDriver() {
 		try{
 			logger.info("Execute Driver quit...");
-			driver.quit();
+			//driver.quit();
+			driver.close();
 			logger.info("Driver Quit --> Done!...");
 
 		}

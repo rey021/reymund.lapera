@@ -24,6 +24,6 @@ public class Hooks {
 
     @After
     public void closeDriver() throws Exception {
-        SE.closeDriver();
+        //SE.closeDriver();
     }
 }
