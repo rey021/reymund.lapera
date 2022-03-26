@@ -6,8 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
 
 import java.util.concurrent.TimeUnit;
 
@@ -33,6 +31,7 @@ public class TestBase {
 
     @AfterSuite(alwaysRun = true)
     public void closeBrowser(){
+        System.out.println("AfterSuite");
         driver.close();
     }
 
