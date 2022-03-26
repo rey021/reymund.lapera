@@ -16,13 +16,13 @@ Feature: Webpage adding cart and submit contact form
       |              |             |                |           |                | We welcome your feedback - but we won't get it unless you complete the form correctly. |
       | forenametest | surnametest | test@gmail.com | 3241234   | This is a test | Thanks forenametest, we appreciate your feedback.                                      |
 
-#  @testcase3
-#  Scenario: Test Case#3 Able to add item to cart
-#    Given User is navigating to shop page
-#    When adding item and quantity on the ff.
-#      | Funny Cow    | 2 |
-#      | Fluffy Bunny | 1 |
-#    Then verify item has been added to cart
+  @testcase3
+  Scenario: Test Case#3 Able to add item to cart
+    Given User is navigating to shop page
+    When adding item and quantity on the ff.
+      | Funny Cow    | 2 |
+      | Fluffy Bunny | 1 |
+    Then verify item has been added to cart
 #
 #  @testcase4
 #  Scenario: Test Case#4 buy multiple item and validate the sub-totals and sum

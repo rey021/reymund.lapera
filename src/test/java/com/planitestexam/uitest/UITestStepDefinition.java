@@ -21,6 +21,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 public class UITestStepDefinition {
 
     private planittestContactForm contactForm = new planittestContactForm();
@@ -80,47 +82,49 @@ public class UITestStepDefinition {
 //    public void leavingFieldsAsBlank() {
 //    }
 //
-//    @Given("User is navigating to shop page")
-//    public void user_is_navigating_to_shop_page() throws InterruptedException {
+    @Given("User is navigating to shop page")
+    public void user_is_navigating_to_shop_page() throws InterruptedException {
+        BrowserActions.clickElement(By.xpath("//*[@id=\"nav-shop\"]/a"));
+        BrowserActions.waitUntilElementIsPresent(By.xpath("/html/body/div[2]/div[@class=\"products ng-scope\"]"));
 //        SE.clickElement("xpath", webelements.get("navigate_shop_button"));
 //        SE.waitUntilElementIsPresent("xpath", webelements.get("shop_page"));
-//    }
+    }
 //
-//    @Then("verify item has been added to cart")
-//    public void viewingTheCartMenuVerifyHavingAnd() throws InterruptedException {
+    @Then("verify item has been added to cart")
+    public void viewingTheCartMenuVerifyHavingAnd() throws InterruptedException {
+
+        BrowserActions.clickElement(By.xpath("//*[@id=\"nav-cart\"]/a"));
+        BrowserActions.waitUntilElementIsPresent(By.xpath("//*[@id=\"nav-cart\"]/a"));
+        boolean elementPresent = BrowserActions.isElementIsPresent(By.xpath("//td[contains(text(),\"Funny Cow\")]"));
+        assertThat(elementPresent).isEqualTo(true);
+        elementPresent = BrowserActions.isElementIsPresent(By.xpath("//td[contains(text(),\"Fluffy Bunny\")]"));
+        assertThat(elementPresent).isEqualTo(true);
+    }
 //
-//        SE.clickElement("xpath", webelements.get("navigate_cart_button"));
-//        SE.waitUntilElementIsPresent("xpath", webelements.get("navigate_cart_button"));
-//        boolean elementPresent = SE.isElementIsPresent("xpath", webelements.get("added_cart_funny_cow"));
-//        assertThat(elementPresent).isEqualTo(true);
-//        elementPresent = SE.isElementIsPresent("xpath", webelements.get("added_cart_fluffy_bunny"));
-//        assertThat(elementPresent).isEqualTo(true);
-//    }
-//
-//    @When("adding item and quantity on the ff.")
-//    public void addingAnd(Map<String, String> dataTable) {
-//
-//        for (Map.Entry<String, String> pair : dataTable.entrySet()) {
-//
-//            for (int x = Integer.parseInt(pair.getValue()); x > 0; x--) {
-//
-//                switch (pair.getKey()) {
-//                    case "Funny Cow":
-//                        SE.clickElement("xpath", webelements.get("buy_button_funny_cow"));
-//                        break;
-//                    case "Fluffy Bunny":
-//                        SE.clickElement("xpath", webelements.get("buy_button_fluffy_cow"));
-//                        break;
-//                    case "Stuffed Frog":
-//                        SE.clickElement("xpath", webelements.get("buy_button_stuffed_frog"));
-//                        break;
-//                    case "Valentine Bear":
-//                        SE.clickElement("xpath", webelements.get("buy_button_valentine_bear"));
-//                        break;
-//                }
-//            }
-//        }
-//    }
+    @When("adding item and quantity on the ff.")
+    public void addingAnd(Map<String, String> dataTable) {
+
+        for (Map.Entry<String, String> pair : dataTable.entrySet()) {
+
+            for (int x = Integer.parseInt(pair.getValue()); x > 0; x--) {
+
+                switch (pair.getKey()) {
+                    case "Funny Cow":
+                        BrowserActions.clickElement(By.xpath("//*[@id=\"product-6\"]/div/p/a[contains(text(),\"Buy\")]"));
+                        break;
+                    case "Fluffy Bunny":
+                        BrowserActions.clickElement(By.xpath("//*[@id=\"product-4\"]/div/p/a"));
+                        break;
+                    case "Stuffed Frog":
+                        BrowserActions.clickElement(By.xpath("//*[@id=\"product-2\"]/div/p/a"));
+                        break;
+                    case "Valentine Bear":
+                        BrowserActions.clickElement(By.xpath("//*[@id=\"product-7\"]/div/p/a"));
+                        break;
+                }
+            }
+        }
+    }
 //
 //    @And("adding the following item, and quantity")
 //    public void pricesForEachItemAreTheFollowing(List<Map<String, String>> dataTable) {

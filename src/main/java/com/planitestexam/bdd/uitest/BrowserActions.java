@@ -136,4 +136,9 @@ public class BrowserActions {
 		element.sendKeys(value);
 		logger.info("SETTEXT has been executed");
 	}
+
+    public static boolean isElementIsPresent(By locator) throws InterruptedException {
+        Thread.sleep(7000);
+        return SE.getWebDriver().findElement(locator).isDisplayed();
+    }
 }
