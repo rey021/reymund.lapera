@@ -1,3 +1,4 @@
+@all
 Feature: Webpage adding cart and submit contact form
 
   To test the contact form of the webpage and verify adding cart functionality

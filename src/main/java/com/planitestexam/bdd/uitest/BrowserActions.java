@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 public class BrowserActions {
@@ -60,6 +61,10 @@ public class BrowserActions {
         logger.info("Page load has been complete");
     }
 
+    public static void waitTime(int seconds) {
+        SE.getWebDriver().manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
+    }
+
     public static <T> WebElement getElement(T locator) {
         String classLocator = getLocatorClass(locator);
         WebElement ele = SE.getWebDriver().findElement(By.xpath(locator.toString()));
@@ -100,6 +105,11 @@ public class BrowserActions {
         }
     }
 
+    public static void clickOnceItsClickable(By locator) {
+        WebDriverWait wait = new WebDriverWait(SE.getWebDriver(), 10);
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
+        element.click();
+    }
 
 
     public enum Status {

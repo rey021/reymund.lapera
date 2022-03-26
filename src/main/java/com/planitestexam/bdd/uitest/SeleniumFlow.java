@@ -38,7 +38,7 @@ public class SeleniumFlow {
 	private static final Logger logger = LogManager.getLogger(SeleniumFlow.class);
 	private static BrowserActions browserActions = BrowserActions.getInstance();
 
-	ChromeDriver driver = null;
+	WebDriver driver = null;
 
 	private SeleniumFlow(){
 		if(instance != null) {
@@ -123,7 +123,6 @@ public class SeleniumFlow {
 	public void closeDriver() {
 		try{
 			logger.info("Execute Driver quit...");
-			//driver.quit();
 			driver.close();
 			logger.info("Driver Quit --> Done!...");
 

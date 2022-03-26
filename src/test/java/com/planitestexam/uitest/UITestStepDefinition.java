@@ -7,6 +7,7 @@ import com.planitestexam.bdd.uitest.BrowserActions;
 import com.planitestexam.bdd.uitest.BrowserUtils;
 import com.planitestexam.bdd.uitest.execute;
 import com.planitestexam.bdd.uitest.SeleniumFlow;
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 
@@ -15,6 +16,10 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterTest;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +41,11 @@ public class UITestStepDefinition {
     ShoppingCart cart = new ShoppingCart();
 
 
+    @AfterTest
+    public void tearDown(){
+        SE.closeDriver();
+    }
+
     @Before
     public void setScenario(Scenario scenario) { this.scenario = scenario;}
 
@@ -54,10 +64,9 @@ public class UITestStepDefinition {
 
     @And("clicking the submit button")
     public void submitting_the_contact_form() throws InterruptedException {
-        BrowserActions.clickElement(By.xpath("/html/body/div[2]/div/form/div/a"));
+        BrowserActions.clickOnceItsClickable(By.xpath("/html/body/div[2]/div/form/div/a"));
         BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
-        BrowserActions.waitUntilElementIsPresent(By.xpath("/html/body/div[2]/div/form/div/a"));
-//        SE.waitUntilElementIsPresent("xpath", webelements.get("contactpage_submitbutton"));
+        BrowserActions.waitTime(5);
     }
 //
 //    @Then("^s?he should get the error message: \"(.*)\"$")
@@ -70,8 +79,7 @@ public class UITestStepDefinition {
     public void fillingUpTheContactForm(String forename, String surname, String email, String telephone, String message) {
         contactForm.fillUpForm(forename,surname,email,telephone,message);
         BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
-        BrowserActions.clickElement(By.xpath("/html/body/div[2]/div/form/div/a"));
-        BrowserActions.waitUntilLoaded();
+        BrowserActions.waitTime(5);
         BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
     }
 //

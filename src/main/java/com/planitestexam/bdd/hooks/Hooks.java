@@ -6,6 +6,7 @@ import com.planitestexam.bdd.uitest.SeleniumFlow;
 import com.planitestexam.bdd.uitest.execute;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import org.testng.annotations.BeforeClass;
 
 
 import java.util.HashMap;
@@ -19,11 +20,11 @@ public class Hooks {
 
     @Before
     public void setUpApplication() throws Exception {
-
+        System.out.println("Before Method");
     }
 
     @After
     public void closeDriver() throws Exception {
-        //SE.closeDriver();
+        System.out.println("After Method");
     }
 }
