@@ -41,7 +41,7 @@ public class BrowserUtils {
     }
 
     private static boolean captureScreenshotDisabled() {
-        return browserManager.getScreenshotCaptureStatus();
+        return !browserManager.getScreenshotCaptureStatus();
     }
 
 }
