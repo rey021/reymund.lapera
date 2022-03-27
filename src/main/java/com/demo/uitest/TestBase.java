@@ -1,4 +1,4 @@
-package com.planitestexam.bdd.uitest;
+package com.demo.uitest;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -9,8 +9,8 @@ import org.testng.annotations.BeforeClass;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.planitestexam.bdd.uitest.DriverFactory.getChromeDriver;
-import static com.planitestexam.bdd.uitest.DriverFactory.getWebDriverWait;
+import static com.demo.uitest.DriverFactory.getChromeDriver;
+import static com.demo.uitest.DriverFactory.getWebDriverWait;
 
 public class TestBase {
 
@@ -20,14 +20,7 @@ public class TestBase {
 
     private static final Logger logger = LogManager.getLogger(TestBase.class);
 
-    @BeforeClass
-    public void startUpBrowser(){
-    System.out.println("Before Suite");
-        driver = getChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.manage().window().fullscreen();
-        wait = getWebDriverWait();
-    }
+
 
     @AfterSuite(alwaysRun = true)
     public void closeBrowser(){

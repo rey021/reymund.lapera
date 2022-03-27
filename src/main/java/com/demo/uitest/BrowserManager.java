@@ -1,4 +1,4 @@
-package com.planitestexam.bdd.uitest;
+package com.demo.uitest;
 
 public class BrowserManager {
     private static boolean doScreenshotCapture = true;

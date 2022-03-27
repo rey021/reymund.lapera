@@ -1,4 +1,4 @@
-package com.planitestexam.bdd.uitest;
+package com.demo.uitest;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -8,12 +8,10 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
 
-import static com.planitestexam.bdd.uitest.DriverFactory.getChromeDriver;
+import static com.demo.uitest.DriverFactory.getChromeDriver;
 
 public class BrowserActions {
 

@@ -1,11 +1,11 @@
-package com.planitestexam.uitest;
+package com.planitestexam.uitest.stepdefs;
 
-import com.planitestexam.bdd.implementation.*;
-import com.planitestexam.bdd.implementation.ContactForm;
-import com.planitestexam.bdd.pages.PagePlanitCart;
-import com.planitestexam.bdd.pages.planittestContactForm;
-import com.planitestexam.bdd.uitest.*;
-import io.cucumber.java.After;
+import com.demo.implementation.*;
+import com.demo.pages.PagePlanitCart;
+import com.demo.pages.planittestContactForm;
+import com.demo.uitest.BrowserActions;
+import com.demo.uitest.BrowserUtils;
+import com.demo.uitest.TestBase;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 
@@ -15,21 +15,20 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.concurrent.TimeUnit;
 
-import static com.planitestexam.bdd.uitest.DriverFactory.getChromeDriver;
+import static com.demo.uitest.DriverFactory.getChromeDriver;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -39,18 +38,9 @@ public class UITestStepDefinition extends TestBase {
     private planittestContactForm contactForm = new planittestContactForm();
     private Scenario scenario;
 
-    Map<String, String> webelements = new HashMap<>();
-
-    Map<String, String> items = new HashMap<>();
     Catalogue catalogue = new Catalogue();
     ShoppingCart cart = new ShoppingCart();
 
-
-
-    @AfterTest
-    public void tearDown(){
-        driver.close();
-    }
 
     @Before
     public void setScenario(Scenario scenario) { this.scenario = scenario;}
@@ -223,11 +213,6 @@ public class UITestStepDefinition extends TestBase {
         if (utilities.checkIfOneDecimal(totalCost)){
             assertEquals(totalCost,df.format(totalCostToBigDecimal));
         }
-        else
-        {
-            assertEquals(totalCost,totalCostToBigDecimal.toString());
-        }
-
+        else  { assertEquals(totalCost,totalCostToBigDecimal.toString()); }
     }
-
 }//End of class

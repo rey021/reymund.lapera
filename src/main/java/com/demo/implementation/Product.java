@@ -1,4 +1,4 @@
-package com.planitestexam.bdd.implementation;
+package com.demo.implementation;
 
 public abstract class Product {
 

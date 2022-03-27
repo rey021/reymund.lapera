@@ -1,16 +1,14 @@
-package com.planitestexam.bdd.pages;
+package com.demo.pages;
 
-import com.planitestexam.bdd.implementation.Product;
-import com.planitestexam.bdd.implementation.ShoppingCart;
-import com.planitestexam.bdd.uitest.BrowserActions;
+import com.demo.implementation.Product;
+import com.demo.implementation.ShoppingCart;
+import com.demo.uitest.BrowserActions;
 import org.openqa.selenium.By;
-import org.testng.asserts.SoftAssert;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Map;
 
-import static org.testng.Assert.assertEquals;
 
 
 public class PagePlanitCart {
