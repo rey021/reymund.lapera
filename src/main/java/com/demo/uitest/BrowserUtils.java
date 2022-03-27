@@ -1,4 +1,4 @@
-package com.planitestexam.bdd.uitest;
+package com.demo.uitest;
 
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 //import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 
-import static com.planitestexam.bdd.uitest.DriverFactory.getChromeDriver;
+import static com.demo.uitest.DriverFactory.getChromeDriver;
 import static org.apache.commons.lang3.ArrayUtils.isNotEmpty;
 
 public class BrowserUtils {

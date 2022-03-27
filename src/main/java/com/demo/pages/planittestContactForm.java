@@ -1,12 +1,12 @@
-package com.planitestexam.bdd.pages;
+package com.demo.pages;
 
-import com.planitestexam.bdd.implementation.ContactForm;
-import com.planitestexam.bdd.uitest.BrowserActions;
+import com.demo.implementation.ContactForm;
+import com.demo.uitest.BrowserActions;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 
-import static com.planitestexam.bdd.uitest.BrowserActions.findElement;
+import static com.demo.uitest.BrowserActions.findElement;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class planittestContactForm {

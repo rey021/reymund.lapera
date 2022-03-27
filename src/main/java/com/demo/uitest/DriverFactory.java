@@ -1,4 +1,4 @@
-package com.planitestexam.bdd.uitest;
+package com.demo.uitest;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
