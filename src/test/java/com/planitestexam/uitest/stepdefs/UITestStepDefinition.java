@@ -41,27 +41,6 @@ public class UITestStepDefinition extends TestBase {
     Catalogue catalogue = new Catalogue();
     ShoppingCart cart = new ShoppingCart();
 
-    @BeforeSuite
-    public void startUpBrowser(){
-    System.out.println("Before suite\n get driver");
-        driver = getChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.manage().window().fullscreen();
-    }
-
-    @AfterSuite
-    public void quitDriver(){
-        System.out.println("AfterSuite.\nquit driver");
-        driver.quit();
-    }
-
-    @AfterTest
-    public void tearDown(){
-        System.out.println("AfterTest.\nclose driver");
-        driver.close();
-    }
-
-
 
     @Before
     public void setScenario(Scenario scenario) { this.scenario = scenario;}
