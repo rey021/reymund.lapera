@@ -16,10 +16,10 @@ import static com.demo.uitest.DriverFactory.getChromeDriver;
 
 public class Hooks extends TestBase{
 
-    private WebDriver driver = getChromeDriver();
+    private static WebDriver driver = getChromeDriver();
 
     @BeforeAll
-    public void startUpBrowser(){
+    public static void before_all(){
         System.out.println("Before suite\n get driver");
         driver = getChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -27,14 +27,9 @@ public class Hooks extends TestBase{
     }
 
     @AfterAll
-    public void tearDown(){
+    public static void after_all(){
         System.out.println("AfterSuite.\nquit driver");
-        driver.quit();
-    }
-
-    @After
-    public void closeBrowser(){
-        System.out.println("AfterTest.\nclose browser");
         driver.close();
+        driver.quit();
     }
 }
