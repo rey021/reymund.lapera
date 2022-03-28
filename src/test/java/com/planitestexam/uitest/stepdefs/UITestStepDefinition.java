@@ -6,7 +6,9 @@ import com.demo.pages.planittestContactForm;
 import com.demo.uitest.BrowserActions;
 import com.demo.uitest.BrowserUtils;
 import com.demo.uitest.TestBase;
+import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
+import io.cucumber.java.BeforeStep;
 import io.cucumber.java.Scenario;
 
 import io.cucumber.java.en.And;
@@ -50,6 +52,11 @@ public class UITestStepDefinition extends TestBase {
         driver = getChromeDriver();
     }
 
+    @AfterStep
+    public void getScreenshot(){
+        BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
+    }
+
     @Given("^Given User is on the (.*)$")
     public void givenUserIsOnTheHttpJupiterCloudPlanittestingCom(String url) {
         driver.get(url);
@@ -59,13 +66,11 @@ public class UITestStepDefinition extends TestBase {
     public void guest_is_browsing_the_contact_page_of_http_jupiter_cloud_planittesting_com() throws InterruptedException {
         BrowserActions.clickElement(By.xpath("//*[@id=\"nav-contact\"]/a"));
         BrowserActions.waitUntilElementIsPresent(By.xpath("/html/body/div[2]/div/form/div/a"));
-        BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
     }
 
     @And("clicking the submit button")
     public void submitting_the_contact_form() {
         BrowserActions.clickOnceItsClickable(By.xpath("/html/body/div[2]/div/form/div/a"));
-        BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
         BrowserActions.waitTime(5);
     }
 //
@@ -80,13 +85,11 @@ public class UITestStepDefinition extends TestBase {
         contactForm.fillUpForm(forename,surname,email,telephone,message);
         BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
         BrowserActions.waitTime(5);
-        BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
     }
 //
     @Then("^s?he should get the the following (.*)$")
     public void checkResponseMessage(String expectedResult) throws InterruptedException {
         contactForm.validate(expectedResult);
-        BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
     }
 //
 //    @When("leaving fields as blank")
@@ -97,7 +100,6 @@ public class UITestStepDefinition extends TestBase {
     public void user_is_navigating_to_shop_page() throws InterruptedException {
         BrowserActions.clickElement(By.xpath("//*[@id=\"nav-shop\"]/a"));
         BrowserActions.waitUntilElementIsPresent(By.xpath("/html/body/div[2]/div[@class=\"products ng-scope\"]"));
-        BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
     }
 //
     @Then("verify item has been added to cart")
@@ -207,8 +209,6 @@ public class UITestStepDefinition extends TestBase {
         System.out.println("Display on Webpage totalCost == " + BrowserActions.getText(By.xpath("/html/body/div[2]/div/form/table/tfoot/tr[1]/td")));
 
         String totalCost = utilities.regex(BrowserActions.getText(By.xpath("/html/body/div[2]/div/form/table/tfoot/tr[1]/td")),"(?<=\\s).*");
-
-        BrowserUtils.captureScreenshotToScenario(scenario, BrowserUtils.captureScreenshotOfBrowser());
 
         if (utilities.checkIfOneDecimal(totalCost)){
             assertEquals(totalCost,df.format(totalCostToBigDecimal));
